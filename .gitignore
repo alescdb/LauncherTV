@@ -34,6 +34,7 @@ captures/
 
 # Intellij
 *.iml
+!LauncherTV.iml
 .idea/workspace.xml
 
 # Keystore files
