@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Simple TV Launcher
+  ~ Copyright 2017 Alexandre Del Bigio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <PreferenceCategory android:title="@string/app_name">
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="preference_screen_always_on"
+        android:summary="@string/summary_screen_always_on"
+        android:title="@string/title_screen_always_on" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="preference_show_date"
+        android:summary="@string/summary_show_date"
+        android:title="@string/title_show_date" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="preference_show_name"
+        android:summary="@string/summary_show_name"
+        android:title="@string/title_show_name" />
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/app_grid">
+    <ListPreference
+        android:defaultValue="3"
+        android:entries="@array/grid_x"
+        android:entryValues="@array/grid_x"
+        android:key="preference_grid_x"
+        android:summary="@string/summary_grid_x"
+        android:title="@string/title_grid_x" />
+    <ListPreference
+        android:defaultValue="2"
+        android:entries="@array/grid_y"
+        android:entryValues="@array/grid_y"
+        android:key="preference_grid_y"
+        android:summary="@string/summary_grid_y"
+        android:title="@string/title_grid_y" />
+    <ListPreference
+        android:defaultValue="5"
+        android:entries="@array/margins"
+        android:entryValues="@array/margins"
+        android:key="preference_margin_x"
+        android:summary="@string/summary_margin_x"
+        android:title="@string/title_margin_x" />
+    <ListPreference
+        android:defaultValue="5"
+        android:entries="@array/margins"
+        android:entryValues="@array/margins"
+        android:key="preference_margin_y"
+        android:summary="@string/summary_margin_y"
+        android:title="@string/title_margin_y" />
+    <!--
+    <org.cosinus.launchertv.views.SliderPreference
+        android:key="preference_transparency"
+        android:defaultValue="0.5"
+        android:dialogMessage="@string/title_transparency"
+        android:summary="@array/transparency_values"
+        android:title="@string/title_transparency" />
+    -->
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/system">
+    <Preference
+        android:key="preference_background"
+        android:summary="@string/summary_background"
+        android:title="@string/title_background">
+      <intent android:action="android.intent.action.SET_WALLPAPER" />
+    </Preference>
+    <Preference
+        android:key="preference_system"
+        android:summary="@string/summary_system"
+        android:title="@string/title_system">
+      <intent android:action="android.settings.SETTINGS" />
+    </Preference>
+  </PreferenceCategory>
+  <PreferenceCategory android:title="@string/about">
+    <Preference
+        android:key="preference_about"
+        android:title="@string/app_name">
+    </Preference>
+    <Preference
+        android:key="preference_google_plus"
+        android:title="@string/title_google_plus">
+      <intent android:action="android.settings.SETTINGS" />
+    </Preference>
+  </PreferenceCategory>
+</PreferenceScreen>
