@@ -18,7 +18,6 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 script:
-script:
   - ./gradlew --stacktrace --info clean
   - ./gradlew --stacktrace --info assemble
   - ./gradlew --stacktrace --info check
