@@ -106,8 +106,13 @@ public class SliderPreference extends DialogPreference
     }
     catch(Exception e)
     {
-      super.setSummary(summaryResId);
+      setSummaryFallback(summaryResId);
     }
+  }
+
+  public void setSummaryFallback( int summaryResId )
+  {
+    super.setSummary(summaryResId);
   }
 
   public float getValue()
