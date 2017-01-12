@@ -1,3 +1,9 @@
+Status
+----------------
+
+  +[![Build Status](https://travis-ci.org/alescdb/LauncherTV.svg?branch=master)](https://travis-ci.org/alescdb/LauncherTV)
+
+
 Google Play
 ----------------
 
