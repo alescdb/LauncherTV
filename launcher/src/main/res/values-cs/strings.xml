@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Simple TV Launcher
+  ~ Copyright 2017 Alexandre Del Bigio
+  ~
+  ~ Translation by Vojtech M.
+  ~
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="title_screen_always_on">Obrazovka vždy zapnutá</string>
+    <string name="summary_screen_always_on">Udržovat obrazovku stále zapnutou</string>
+    <string name="app_grid">Rozložení mřížky</string>
+    <string name="title_grid_x">Sloupce</string>
+    <string name="summary_grid_x">Počet sloupců: %s</string>
+    <string name="title_grid_y">Řádky</string>
+    <string name="summary_grid_y">Počet řádků: %s</string>
+    <string name="system">Systém</string>
+    <string name="title_background">Pozadí</string>
+    <string name="summary_background">Nastavit obrázek pozadí</string>
+    <string name="title_system">Systémová nastavení</string>
+    <string name="summary_system">Otevřít systémová nastavení</string>
+    <string name="summary_show_date">Zobrazovat datum pod polem s časem</string>
+    <string name="title_show_date">Zobrazit datum</string>
+    <string name="summary_show_name">Zobrazovat názvy aplikací na hlavní obrazovce</string>
+    <string name="title_show_name">Zobrazit názvy</string>
+    <string name="title_margin_x">Okraje ikon ve směru osy X</string>
+    <string name="title_margin_y">Okraje ikon ve směru osy Y</string>
+    <string name="summary_margin_x">Šířka volného místa mezi ikonami: %s dp</string>
+    <string name="summary_margin_y">Výška volného místa mezi ikonami: %s dp</string>
+    <string name="title_transparency">Průhlednost pozadí</string>
+    <string name="about">O aplikaci</string>
+</resources>
