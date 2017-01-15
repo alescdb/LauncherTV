@@ -26,7 +26,7 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:id="@+id/application_icon"
-      android:src="@drawable/ic_launcher"
+      android:src="@mipmap/ic_launcher"
       android:duplicateParentState="true"
       android:focusable="false" />
 
