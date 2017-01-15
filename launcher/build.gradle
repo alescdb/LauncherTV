@@ -19,14 +19,27 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
+
     defaultConfig {
         applicationId "org.cosinus.launchertv"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 142
-        versionName "1.4.2"
+        versionCode 150
+        versionName "1.5.0"
     }
+
+    signingConfigs {
+        if (project.hasProperty('keystorePassword')) {
+            release {
+                storeFile file(property('keystoreFile'))
+                storePassword property('keystorePassword')
+                keyAlias property('keystoreAlias')
+                keyPassword property('keystorePassword')
+            }
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
@@ -35,9 +48,11 @@ android {
             minifyEnabled true
             proguardFile 'proguard-rules.pro'
             zipAlignEnabled true
+            if (project.hasProperty('keystorePassword')) {
+                //noinspection GroovyAssignabilityCheck
+                signingConfig signingConfigs.release
+            }
         }
-    }
-    productFlavors {
     }
 }
 
