@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Simple TV Launcher
+  ~ Copyright 2017 Alexandre Del Bigio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+  <string name="app_name">Simple TV Launcher</string>
+  <string name="about">A propos</string>
+  <string name="app_grid">Taille de la grille</string>
+  <string name="summary_background">Fond d\'écran</string>
+  <string name="summary_grid_x">Nombre de colonnes : %s</string>
+  <string name="summary_grid_y">Nombre de ligne : %s</string>
+  <string name="summary_margin_x">Largeur d\'espacement entre les icones : %s dp</string>
+  <string name="summary_margin_y">Hauteur d\'espacement entre les icones : %s dp</string>
+  <string name="summary_screen_always_on">Garder l\'écran allumer</string>
+  <string name="summary_show_date">Afficher la date sous l\'heure</string>
+  <string name="summary_show_name">Afficher le nom des applications sur l\'écran principal</string>
+  <string name="summary_system">Ouvrir les paramètres Android</string>
+  <string name="system">Système</string>
+  <string name="title_background">Fond d\'écran</string>
+  <string name="title_grid_x">Colonnes</string>
+  <string name="title_grid_y">Lignes</string>
+  <string name="title_margin_x">Marge X</string>
+  <string name="title_margin_y">Marge Y</string>
+  <string name="title_screen_always_on">Ecran toujours allumé</string>
+  <string name="title_show_date">Afficher la date</string>
+  <string name="title_show_name">Afficher les noms</string>
+  <string name="title_system">Paramètres système</string>
+  <string name="title_transparency">Transparence du fond</string>
+</resources>
