@@ -151,7 +151,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 				} else {
 					av.setId(View.generateViewId());
 				}
-				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1);
+				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
 				lp.setMargins(marginX, marginY, marginX, marginY);
 				av.setLayoutParams(lp);
 				ll.addView(av);
