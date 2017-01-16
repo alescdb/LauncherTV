@@ -62,14 +62,12 @@
 			android:key="preference_margin_y"
 			android:summary="@string/summary_margin_y"
 			android:title="@string/title_margin_y"/>
-		<!--
 		<org.cosinus.launchertv.views.SliderPreference
 			android:key="preference_transparency"
-			android:defaultValue="0.5"
 			android:dialogMessage="@string/title_transparency"
+			android:defaultValue="@string/transparency_default"
 			android:summary="@array/transparency_values"
 			android:title="@string/title_transparency" />
-		-->
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/system">
 		<Preference

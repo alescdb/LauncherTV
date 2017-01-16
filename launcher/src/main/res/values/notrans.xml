@@ -15,13 +15,13 @@
   ~ limitations under the License.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<resources>
 	<string name="app_name" translatable="false">Simple TV Launcher</string>
 	<string name="title_google_plus" translatable="false">Google+</string>
     <string name="test_clock" translatable="false">00:00</string>
     <string name="test_date" translatable="false">Sunday 1, January</string>
-    <string name="test_application" translatable="false">Application</string>
+	<string name="test_application" translatable="false">Application</string>
+	<string name="transparency_default" translatable="false">0.4</string>
     <string-array name="grid_x" translatable="false">
 		<item>2</item>
 		<item>3</item>
@@ -42,7 +42,7 @@
 		<item>25</item>
 		<item>30</item>
 	</string-array>
-	<string-array name="transparency_values" translatable="false" tools:ignore="UnusedResources">
+	<string-array name="transparency_values" translatable="false">
 		<item>0%</item>
 		<item>5%</item>
 		<item>10%</item>
@@ -64,6 +64,4 @@
 		<item>90%</item>
 		<item>100%</item>
 	</string-array>
-
-
 </resources>

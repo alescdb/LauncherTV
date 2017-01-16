@@ -1,9 +1,15 @@
 package org.cosinus.launchertv.views;
 
+/*
+ * Copyright 2012 Jay Weisskopf
+ *
+ * Licensed under the MIT License (see LICENSE.txt)
+ */
+
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.preference.DialogPreference;
-import android.support.annotation.ArrayRes;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.SeekBar;
@@ -16,11 +22,11 @@ import org.cosinus.launchertv.R;
 @SuppressWarnings("ALL")
 public class SliderPreference extends DialogPreference {
 
-	private final static int SEEKBAR_RESOLUTION = 10000;
+	protected final static int SEEKBAR_RESOLUTION = 10000;
 
-	private float mValue;
-	private int mSeekBarValue;
-	private CharSequence[] mSummaries;
+	protected float mValue;
+	protected int mSeekBarValue;
+	protected CharSequence[] mSummaries;
 
 	/**
 	 * @param context
@@ -73,16 +79,7 @@ public class SliderPreference extends DialogPreference {
 		}
 	}
 
-	@Override
-	public void setSummary(@ArrayRes int summaryResId) {
-		try {
-			setSummary(getContext().getResources().getStringArray(summaryResId));
-		} catch (Exception e) {
-			setSummaryFallback(summaryResId);
-		}
-	}
-
-	private void setSummary(CharSequence[] summaries) {
+	public void setSummary(CharSequence[] summaries) {
 		mSummaries = summaries;
 	}
 
@@ -92,16 +89,16 @@ public class SliderPreference extends DialogPreference {
 		mSummaries = null;
 	}
 
-	private void setSummaryFallback(int summaryResId) {
-		super.setSummary(summaryResId);
+	@Override
+	public void setSummary(int summaryResId) {
+		try {
+			this.setSummary(getContext().getResources().getStringArray(summaryResId));
+		} catch (Exception e) {
+			super.setSummary(summaryResId);
+		}
 	}
 
-	@SuppressWarnings("unused")
-	public float getValue() {
-		return mValue;
-	}
-
-	private void setValue(float value) {
+	public void setValue(float value) {
 		value = Math.max(0, Math.min(value, 1)); // clamp to [0, 1]
 		if (shouldPersist()) {
 			persistFloat(value);

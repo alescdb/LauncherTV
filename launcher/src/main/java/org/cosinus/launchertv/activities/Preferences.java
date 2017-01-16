@@ -40,6 +40,7 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_GRID_Y = "preference_grid_y";
 	public static final String PREFERENCE_SHOW_NAME = "preference_show_name";
 	public static final String PREFERENCE_MARGIN_X = "preference_margin_x";
+	public static final String PREFERENCE_TRANSPARENCY = "preference_transparency";
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
 	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
 	private static final String PREFERENCE_ABOUT = "preference_about";
