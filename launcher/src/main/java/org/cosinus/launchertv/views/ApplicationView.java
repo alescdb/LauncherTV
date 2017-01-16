@@ -20,11 +20,14 @@ package org.cosinus.launchertv.views;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.StateSet;
@@ -74,38 +77,26 @@ public class ApplicationView extends LinearLayout {
 	}
 
 	@SuppressWarnings("deprecation")
+	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 	private void setBackgroundStateDrawable() {
-		Drawable drawableEnabled;
-		Drawable drawableFocused;
-		Drawable drawablePressed;
+		Resources.Theme theme = getContext().getTheme();
+		Drawable drawableEnabled = this.getResources().getDrawable(R.drawable.application_normal, theme);
+		Drawable drawableFocused = this.getResources().getDrawable(R.drawable.application_focused, theme);
+		Drawable drawablePressed = this.getResources().getDrawable(R.drawable.application_pressed, theme);
 
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-			Resources.Theme theme = getContext().getTheme();
-			drawableEnabled = this.getResources().getDrawable(R.drawable.application_normal, theme);
-			drawableFocused = this.getResources().getDrawable(R.drawable.application_focused, theme);
-			drawablePressed = this.getResources().getDrawable(R.drawable.application_pressed, theme);
-		} else {
-			drawableEnabled = this.getResources().getDrawable(R.drawable.application_normal);
-			drawableFocused = this.getResources().getDrawable(R.drawable.application_focused);
-			drawablePressed = this.getResources().getDrawable(R.drawable.application_pressed);
-		}
-
-		drawableEnabled.setAlpha(getTransparency(0));
-		drawableFocused.setAlpha(getTransparency(0.2F));
-		drawablePressed.setAlpha(getTransparency(0.2F));
+		drawableEnabled.setColorFilter(Color.argb(getTransparency(0), 0xF0, 0xF0, 0xF0), PorterDuff.Mode.SRC);
+		drawableFocused.setColorFilter(Color.argb(getTransparency(0.2F), 0xE0, 0xE0, 0xFF), PorterDuff.Mode.SRC);
+		drawablePressed.setColorFilter(Color.argb(getTransparency(0.2F), 0xE0, 0xE0, 0xFF), PorterDuff.Mode.SRC);
 
 		StateListDrawable stateListDrawable = new StateListDrawable();
-		stateListDrawable.addState(new int[]{android.R.attr.state_focused}, drawableFocused);
-		stateListDrawable.addState(new int[]{android.R.attr.state_selected}, drawableFocused);
-		stateListDrawable.addState(new int[]{android.R.attr.state_hovered}, drawableFocused);
+		stateListDrawable.addState(new int[]{
+				android.R.attr.state_focused,
+				android.R.attr.state_selected,
+				android.R.attr.state_hovered}, drawableFocused);
 		stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
 		stateListDrawable.addState(StateSet.WILD_CARD, drawableEnabled);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			setBackground(stateListDrawable);
-		} else {
-			setBackgroundDrawable(stateListDrawable);
-		}
+		setBackground(stateListDrawable);
 	}
 
 	private int getTransparency(float add) {
@@ -124,7 +115,12 @@ public class ApplicationView extends LinearLayout {
 
 		setClickable(true);
 		setFocusable(true);
-		setBackgroundStateDrawable();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			setBackgroundStateDrawable();
+		} else {
+			setBackgroundResource(R.drawable.application_selector);
+		}
 
 
 		mIcon = (ImageView) findViewById(R.id.application_icon);

@@ -33,7 +33,7 @@
 			android:summary="@string/summary_show_name"
 			android:title="@string/title_show_name"/>
 	</PreferenceCategory>
-	<PreferenceCategory android:title="@string/app_grid">
+	<PreferenceCategory android:key="category_grid" android:title="@string/app_grid">
 		<ListPreference
 			android:defaultValue="3"
 			android:entries="@array/grid_x"
