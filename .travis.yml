@@ -19,4 +19,6 @@ before_script:
   - mkdir -p $HOME/.cache/lint
   - chmod 0755 ./gradlew
 script:
-  - ./gradlew --stacktrace --info checkStyle build connectedCheck
+  - ./gradlew checkStyle build connectedCheck
+
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
