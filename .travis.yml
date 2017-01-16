@@ -6,7 +6,7 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.1
+    - build-tools-25.0.2
     - android-25
     - extra-google-m2repository
     - extra-android-m2repository
@@ -19,4 +19,6 @@ before_script:
   - mkdir -p $HOME/.cache/lint
   - chmod 0755 ./gradlew
 script:
-  - ./gradlew --stacktrace --info build connectedCheck
+  - ./gradlew checkStyle build connectedCheck
+
+after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
