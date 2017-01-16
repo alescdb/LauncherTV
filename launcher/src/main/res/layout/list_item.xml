@@ -16,29 +16,29 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:gravity="center_vertical"
-              android:padding="5dp">
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:gravity="center_vertical"
+			  android:orientation="horizontal"
+			  android:padding="5dp">
 
-  <ImageView
-      android:layout_width="48dp"
-      android:layout_height="48dp"
-      android:id="@+id/application_icon"
-      android:src="@mipmap/ic_launcher"
-      android:duplicateParentState="true"
-      android:focusable="false" />
+	<ImageView
+		android:id="@+id/application_icon"
+		android:layout_width="48dp"
+		android:layout_height="48dp"
+		android:duplicateParentState="true"
+		android:focusable="false"
+		android:src="@mipmap/ic_launcher"/>
 
-  <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:paddingLeft="10dp"
-      android:textAppearance="?android:attr/textAppearanceMedium"
-      android:singleLine="true"
-      android:text="Application"
-      android:id="@+id/application_name"
-      android:duplicateParentState="true"
-      android:focusable="false" />
+	<TextView
+		android:id="@+id/application_name"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:duplicateParentState="true"
+		android:focusable="false"
+		android:paddingLeft="10dp"
+		android:singleLine="true"
+		android:text="Application"
+		android:textAppearance="?android:attr/textAppearanceMedium"/>
 </LinearLayout>
 

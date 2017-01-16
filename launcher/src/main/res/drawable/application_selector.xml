@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Simple TV Launcher
   ~ Copyright 2017 Alexandre Del Bigio
   ~
@@ -17,15 +16,12 @@
   -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_pressed="true"
-        android:drawable="@drawable/application_pressed" />
-  <!-- pressed -->
-  <item android:state_focused="true"
-        android:drawable="@drawable/application_focused" />
-  <!-- focused -->
-  <item android:state_hovered="true"
-        android:drawable="@drawable/application_focused" />
-  <!-- hovered -->
-  <item android:drawable="@drawable/application_normal" />
-  <!-- default -->
+	<item android:drawable="@drawable/application_pressed" android:state_pressed="true"/>
+	<!-- pressed -->
+	<item android:drawable="@drawable/application_focused" android:state_focused="true"/>
+	<!-- focused -->
+	<item android:drawable="@drawable/application_focused" android:state_hovered="true"/>
+	<!-- hovered -->
+	<item android:drawable="@drawable/application_normal"/>
+	<!-- default -->
 </selector>

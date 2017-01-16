@@ -16,26 +16,26 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:gravity="center_horizontal"
-              android:padding="5dp">
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:gravity="center_horizontal"
+			  android:orientation="vertical"
+			  android:padding="5dp">
 
-  <ImageView
-      android:layout_width="96dp"
-      android:layout_height="96dp"
-      android:id="@+id/application_icon"
-      android:src="@mipmap/ic_launcher" />
+	<ImageView
+		android:id="@+id/application_icon"
+		android:layout_width="96dp"
+		android:layout_height="96dp"
+		android:src="@mipmap/ic_launcher"/>
 
-  <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:singleLine="true"
-      android:text="Application"
-      android:id="@+id/application_name"
-      android:layout_marginTop="10dp"
-      android:gravity="center_horizontal" />
+	<TextView
+		android:id="@+id/application_name"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:gravity="center_horizontal"
+		android:singleLine="true"
+		android:text="Application"
+		android:textAppearance="?android:attr/textAppearanceSmall"/>
 
 </LinearLayout>

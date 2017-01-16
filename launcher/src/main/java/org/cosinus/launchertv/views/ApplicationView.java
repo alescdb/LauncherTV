@@ -29,106 +29,89 @@ import org.cosinus.launchertv.R;
 
 import java.util.Locale;
 
-public class ApplicationView extends LinearLayout
-{
-  private ImageView mIcon;
-  private TextView mText;
-  private String mPackageName;
-  private int mPosition;
+public class ApplicationView extends LinearLayout {
+	private ImageView mIcon;
+	private TextView mText;
+	private String mPackageName;
+	private int mPosition;
 
-  public ApplicationView( Context context )
-  {
-    super(context);
-    initialize(context, null, null);
-  }
+	public ApplicationView(Context context) {
+		super(context);
+		initialize(context, null, null);
+	}
 
-  public ApplicationView( Context context, AttributeSet attrs )
-  {
-    super(context, attrs);
-    initialize(context, attrs, null);
-  }
+	public ApplicationView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+		initialize(context, attrs, null);
+	}
 
-  public ApplicationView( Context context, AttributeSet attrs, int defStyle )
-  {
-    super(context, attrs, defStyle);
-    initialize(context, attrs, defStyle);
-  }
+	public ApplicationView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		initialize(context, attrs, defStyle);
+	}
 
-  public static String getPreferenceKey( int appNum )
-  {
-    return (String.format(Locale.getDefault(), "application_%02d", appNum));
-  }
+	public static String getPreferenceKey(int appNum) {
+		return (String.format(Locale.getDefault(), "application_%02d", appNum));
+	}
 
-  private void initialize( Context context, AttributeSet attrs, Integer defStyle )
-  {
-    inflate(context, R.layout.application, this);
-    setClickable(true);
-    setFocusable(true);
-    setBackgroundResource(R.drawable.application_selector);
+	private void initialize(Context context, AttributeSet attrs, Integer defStyle) {
+		inflate(context, R.layout.application, this);
+		setClickable(true);
+		setFocusable(true);
+		setBackgroundResource(R.drawable.application_selector);
 
-    mIcon = (ImageView) findViewById(R.id.application_icon);
-    mText = (TextView) findViewById(R.id.application_name);
-  }
+		mIcon = (ImageView) findViewById(R.id.application_icon);
+		mText = (TextView) findViewById(R.id.application_name);
+	}
 
-  public ApplicationView setImageResource( int res )
-  {
-    mIcon.setImageResource(res);
-    return (this);
-  }
+	public ApplicationView setImageResource(int res) {
+		mIcon.setImageResource(res);
+		return (this);
+	}
 
-  public ApplicationView setImageDrawable( Drawable drawable )
-  {
-    mIcon.setImageDrawable(drawable);
-    return (this);
-  }
+	public ApplicationView setImageDrawable(Drawable drawable) {
+		mIcon.setImageDrawable(drawable);
+		return (this);
+	}
 
-  public ApplicationView setText( CharSequence text )
-  {
-    mText.setText(text);
-    return (this);
-  }
+	public ApplicationView setText(CharSequence text) {
+		mText.setText(text);
+		return (this);
+	}
 
-  public void showName( boolean show )
-  {
-    mText.setVisibility(
-        show ? VISIBLE : GONE
-    );
-  }
+	public void showName(boolean show) {
+		mText.setVisibility(
+				show ? VISIBLE : GONE
+		);
+	}
 
-  public String getPackageName()
-  {
-    return mPackageName;
-  }
+	public String getPackageName() {
+		return mPackageName;
+	}
 
-  public ApplicationView setPackageName( String packageName )
-  {
-    mPackageName = packageName;
-    return (this);
-  }
+	public ApplicationView setPackageName(String packageName) {
+		mPackageName = packageName;
+		return (this);
+	}
 
-  public String getName()
-  {
-    return mText.getText().toString();
-  }
+	public String getName() {
+		return mText.getText().toString();
+	}
 
-  public boolean hasPackage()
-  {
-    return TextUtils.isEmpty(mPackageName) == false;
-  }
+	public boolean hasPackage() {
+		return TextUtils.isEmpty(mPackageName) == false;
+	}
 
-  public int getPosition()
-  {
-    return mPosition;
-  }
+	public int getPosition() {
+		return mPosition;
+	}
 
-  public void setPosition( int position )
-  {
-    mPosition = position;
-  }
+	public void setPosition(int position) {
+		mPosition = position;
+	}
 
-  public String getPreferenceKey()
-  {
-    return (getPreferenceKey(getPosition()));
-  }
+	public String getPreferenceKey() {
+		return (getPreferenceKey(getPosition()));
+	}
 
 }

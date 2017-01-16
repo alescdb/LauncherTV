@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Simple TV Launcher
   ~ Copyright 2017 Alexandre Del Bigio
   ~
@@ -20,26 +19,26 @@
   -->
 
 <resources>
-    <string name="title_screen_always_on">Obrazovka vždy zapnutá</string>
-    <string name="summary_screen_always_on">Udržovat obrazovku stále zapnutou</string>
-    <string name="app_grid">Rozložení mřížky</string>
-    <string name="title_grid_x">Sloupce</string>
-    <string name="summary_grid_x">Počet sloupců: %s</string>
-    <string name="title_grid_y">Řádky</string>
-    <string name="summary_grid_y">Počet řádků: %s</string>
-    <string name="system">Systém</string>
-    <string name="title_background">Pozadí</string>
-    <string name="summary_background">Nastavit obrázek pozadí</string>
-    <string name="title_system">Systémová nastavení</string>
-    <string name="summary_system">Otevřít systémová nastavení</string>
-    <string name="summary_show_date">Zobrazovat datum pod polem s časem</string>
-    <string name="title_show_date">Zobrazit datum</string>
-    <string name="summary_show_name">Zobrazovat názvy aplikací na hlavní obrazovce</string>
-    <string name="title_show_name">Zobrazit názvy</string>
-    <string name="title_margin_x">Okraje ikon ve směru osy X</string>
-    <string name="title_margin_y">Okraje ikon ve směru osy Y</string>
-    <string name="summary_margin_x">Šířka volného místa mezi ikonami: %s dp</string>
-    <string name="summary_margin_y">Výška volného místa mezi ikonami: %s dp</string>
-    <string name="title_transparency">Průhlednost pozadí</string>
-    <string name="about">O aplikaci</string>
+	<string name="title_screen_always_on">Obrazovka vždy zapnutá</string>
+	<string name="summary_screen_always_on">Udržovat obrazovku stále zapnutou</string>
+	<string name="app_grid">Rozložení mřížky</string>
+	<string name="title_grid_x">Sloupce</string>
+	<string name="summary_grid_x">Počet sloupců: %s</string>
+	<string name="title_grid_y">Řádky</string>
+	<string name="summary_grid_y">Počet řádků: %s</string>
+	<string name="system">Systém</string>
+	<string name="title_background">Pozadí</string>
+	<string name="summary_background">Nastavit obrázek pozadí</string>
+	<string name="title_system">Systémová nastavení</string>
+	<string name="summary_system">Otevřít systémová nastavení</string>
+	<string name="summary_show_date">Zobrazovat datum pod polem s časem</string>
+	<string name="title_show_date">Zobrazit datum</string>
+	<string name="summary_show_name">Zobrazovat názvy aplikací na hlavní obrazovce</string>
+	<string name="title_show_name">Zobrazit názvy</string>
+	<string name="title_margin_x">Okraje ikon ve směru osy X</string>
+	<string name="title_margin_y">Okraje ikon ve směru osy Y</string>
+	<string name="summary_margin_x">Šířka volného místa mezi ikonami: %s dp</string>
+	<string name="summary_margin_y">Výška volného místa mezi ikonami: %s dp</string>
+	<string name="title_transparency">Průhlednost pozadí</string>
+	<string name="about">O aplikaci</string>
 </resources>

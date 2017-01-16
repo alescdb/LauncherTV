@@ -23,52 +23,40 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 
 
-public class AppInfo
-{
-  private Drawable mIcon;
-  private String mName;
-  private String mPackageName;
+public class AppInfo {
+	private Drawable mIcon;
+	private String mName;
+	private String mPackageName;
 
-  public AppInfo( PackageManager packageManager, ResolveInfo resolveInfo )
-  {
-    mPackageName = resolveInfo.activityInfo.packageName;
-    mIcon = resolveInfo.loadIcon(packageManager);
-    try
-    {
-      mName = resolveInfo.loadLabel(packageManager).toString();
-    }
-    catch(Exception e)
-    {
-      mName = mPackageName;
-    }
-  }
+	public AppInfo(PackageManager packageManager, ResolveInfo resolveInfo) {
+		mPackageName = resolveInfo.activityInfo.packageName;
+		mIcon = resolveInfo.loadIcon(packageManager);
+		try {
+			mName = resolveInfo.loadLabel(packageManager).toString();
+		} catch (Exception e) {
+			mName = mPackageName;
+		}
+	}
 
-  public AppInfo( PackageManager packageManager, ApplicationInfo applicationInfo )
-  {
-    mPackageName = applicationInfo.packageName;
-    mIcon = applicationInfo.loadIcon(packageManager);
-    try
-    {
-      mName = applicationInfo.loadLabel(packageManager).toString();
-    }
-    catch(Exception e)
-    {
-      mName = mPackageName;
-    }
-  }
+	public AppInfo(PackageManager packageManager, ApplicationInfo applicationInfo) {
+		mPackageName = applicationInfo.packageName;
+		mIcon = applicationInfo.loadIcon(packageManager);
+		try {
+			mName = applicationInfo.loadLabel(packageManager).toString();
+		} catch (Exception e) {
+			mName = mPackageName;
+		}
+	}
 
-  public String getName()
-  {
-    return mName;
-  }
+	public String getName() {
+		return mName;
+	}
 
-  public Drawable getIcon()
-  {
-    return mIcon;
-  }
+	public Drawable getIcon() {
+		return mIcon;
+	}
 
-  public String getPackageName()
-  {
-    return mPackageName;
-  }
+	public String getPackageName() {
+		return mPackageName;
+	}
 }

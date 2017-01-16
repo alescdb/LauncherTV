@@ -17,6 +17,10 @@
 
 package org.cosinus.launchertv;
 
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -25,61 +29,69 @@ import android.view.WindowManager;
 
 import org.cosinus.launchertv.fragments.ApplicationFragment;
 
-public class Launcher extends FragmentActivity
-{
-  @Override
-  protected void onCreate( Bundle savedInstanceState )
-  {
-    super.onCreate(savedInstanceState);
+public class Launcher extends FragmentActivity {
+	public static Drawable getWindowBackground(final Context context) {
+		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.windowBackground});
+		try {
+			return a.getDrawable(0);
+		} finally {
+			a.recycle();
+		}
+	}
 
-    setFullScreen();
-    setContentView(R.layout.activity_launcher);
+	public static int getColorBackground(final Context context) {
+		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.colorBackground});
+		try {
+			return a.getColor(0, Color.TRANSPARENT);
+		} finally {
+			a.recycle();
+		}
+	}
 
-    getSupportFragmentManager().beginTransaction()
-        .replace(R.id.container, ApplicationFragment.newInstance(), ApplicationFragment.TAG)
-        .commit();
-  }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-  @Override
-  protected void onResume()
-  {
-    super.onResume();
-    setFullScreen();
-  }
+		setFullScreen();
+		setContentView(R.layout.activity_launcher);
 
-  private void setFullScreen()
-  {
-    try
-    {
-      if(Build.VERSION.SDK_INT < 16)
-      {
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER
-        );
-      }
-      else
-      {
-        View decorView = getWindow().getDecorView();
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.container, ApplicationFragment.newInstance(), ApplicationFragment.TAG)
+				.commit();
+	}
 
-        getWindow().setFlags(
-            WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER,
-            WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER
-        );
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setFullScreen();
+	}
 
-        int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
-            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
-            | View.SYSTEM_UI_FLAG_IMMERSIVE;
+	private void setFullScreen() {
+		try {
+			if (Build.VERSION.SDK_INT < 19) {
+				getWindow().setFlags(
+						WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER,
+						WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER
+				);
+			} else {
+				View decorView = getWindow().getDecorView();
 
-        decorView.setSystemUiVisibility(uiOptions);
-      }
-    }
-    catch(Exception e)
-    {
-      e.printStackTrace();
-    }
-  }
+				int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+						| View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+						| View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+						| View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+						| View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+						| View.SYSTEM_UI_FLAG_IMMERSIVE;
+
+				decorView.setSystemUiVisibility(uiOptions);
+
+				getWindow().setFlags(
+						WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER,
+						WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER
+				);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

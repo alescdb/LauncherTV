@@ -16,10 +16,31 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = '6.19'
+}
+
+check.dependsOn 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    configFile file("${project.rootDir}/style/checkstyle.xml")
+    configProperties.checkstyleSuppressionsPath = file("${project.rootDir}/style/suppressions.xml").absolutePath
+
+    source 'src/main/java'
+    include 'org/cosinus/**/*.java'
+    exclude '**/gen/**'
+
+    def configProps = ['proj.module.dir': projectDir.absolutePath]
+    configProperties configProps
+
+    classpath = files()
+}
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.1'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "org.cosinus.launchertv"
@@ -57,5 +78,5 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
 }

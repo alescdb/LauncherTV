@@ -15,39 +15,38 @@
   ~ limitations under the License.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/application_layout"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    android:gravity="center_vertical|center_horizontal"
-    android:duplicateParentState="true"
-    android:focusable="false">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:id="@+id/application_layout"
+			  android:layout_width="fill_parent"
+			  android:layout_height="fill_parent"
+			  android:duplicateParentState="true"
+			  android:focusable="false"
+			  android:gravity="center_vertical|center_horizontal"
+			  android:orientation="vertical"
+			  android:paddingBottom="5dp"
+			  android:paddingTop="5dp">
 
-  <ImageView
-      android:layout_width="@dimen/application_drawable_size"
-      android:layout_height="@dimen/application_drawable_size"
-      android:id="@+id/application_icon"
-      android:src="@drawable/ic_add_white_24dp"
-      android:duplicateParentState="true"
-      android:focusable="false" />
+	<ImageView
+		android:id="@+id/application_icon"
+		android:layout_width="@dimen/application_drawable_size"
+		android:layout_height="@dimen/application_drawable_size"
+		android:duplicateParentState="true"
+		android:focusable="false"
+		android:src="@drawable/ic_add_white_24dp"/>
 
-  <TextView
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:textAppearance="?android:attr/textAppearanceSmall"
-      android:singleLine="true"
-      android:text=""
-      android:shadowColor="#ff000000"
-      android:shadowDx="1"
-      android:shadowDy="1"
-      android:shadowRadius="0.5"
-      android:id="@+id/application_name"
-      android:layout_marginTop="10dp"
-      android:gravity="center_horizontal"
-      android:duplicateParentState="true"
-      android:focusable="false" />
+	<TextView
+		android:id="@+id/application_name"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="10dp"
+		android:duplicateParentState="true"
+		android:focusable="false"
+		android:gravity="center_horizontal"
+		android:shadowColor="#ff000000"
+		android:shadowDx="1"
+		android:shadowDy="1"
+		android:shadowRadius="0.5"
+		android:singleLine="true"
+		android:text=""
+		android:textAppearance="?android:attr/textAppearanceSmall"/>
 </LinearLayout>

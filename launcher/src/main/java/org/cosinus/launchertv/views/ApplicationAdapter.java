@@ -27,38 +27,32 @@ import android.widget.TextView;
 import org.cosinus.launchertv.AppInfo;
 import org.cosinus.launchertv.R;
 
-public class ApplicationAdapter extends ArrayAdapter<AppInfo>
-{
-  private final int mResource;
+public class ApplicationAdapter extends ArrayAdapter<AppInfo> {
+	private final int mResource;
 
-  public ApplicationAdapter( Context context, int resId, AppInfo[] items )
-  {
-    super(context, R.layout.list_item, items);
-    mResource = resId;
-  }
+	public ApplicationAdapter(Context context, int resId, AppInfo[] items) {
+		super(context, R.layout.list_item, items);
+		mResource = resId;
+	}
 
-  @Override
-  public View getView( int position, View convertView, ViewGroup parent )
-  {
-    View view;
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		View view;
 
-    if(convertView == null)
-    {
-      view = View.inflate(getContext(), mResource, null);
-    }
-    else
-    {
-      view = convertView;
-    }
-    ImageView packageImage = (ImageView) view.findViewById(R.id.application_icon);
-    TextView packageName = (TextView) view.findViewById(R.id.application_name);
-    AppInfo appInfo = getItem(position);
+		if (convertView == null) {
+			view = View.inflate(getContext(), mResource, null);
+		} else {
+			view = convertView;
+		}
+		ImageView packageImage = (ImageView) view.findViewById(R.id.application_icon);
+		TextView packageName = (TextView) view.findViewById(R.id.application_name);
+		AppInfo appInfo = getItem(position);
 
-    view.setTag(appInfo);
-    packageName.setText(appInfo.getName());
-    if(appInfo.getIcon() != null)
-      packageImage.setImageDrawable(appInfo.getIcon());
+		view.setTag(appInfo);
+		packageName.setText(appInfo.getName());
+		if (appInfo.getIcon() != null)
+			packageImage.setImageDrawable(appInfo.getIcon());
 
-    return (view);
-  }
+		return (view);
+	}
 }

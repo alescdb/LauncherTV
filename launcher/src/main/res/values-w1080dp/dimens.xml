@@ -16,6 +16,6 @@
   -->
 
 <resources>
-  <dimen name="activity_horizontal_margin">64dp</dimen>
-  <dimen name="application_drawable_size">128dp</dimen>
+	<dimen name="activity_horizontal_margin">64dp</dimen>
+	<dimen name="application_drawable_size">128dp</dimen>
 </resources>
