@@ -41,8 +41,8 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_SHOW_NAME = "preference_show_name";
 	public static final String PREFERENCE_MARGIN_X = "preference_margin_x";
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
-	public static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
-	public static final String PREFERENCE_ABOUT = "preference_about";
+	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
+	private static final String PREFERENCE_ABOUT = "preference_about";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class Preferences extends PreferenceActivity {
 			}
 		});
 
-		PackageInfo pInfo = null;
+		PackageInfo pInfo;
 		String version = "#Err";
 		try {
 			pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -81,7 +81,7 @@ public class Preferences extends PreferenceActivity {
 		});
 	}
 
-	public void bindSummary(String key, final int resId) {
+	private void bindSummary(String key, final int resId) {
 		final ListPreference p = (ListPreference) findPreference(key);
 		setPreferenceSummaryValue(p, resId, p.getValue());
 		p.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -93,7 +93,7 @@ public class Preferences extends PreferenceActivity {
 		});
 	}
 
-	public void setPreferenceSummaryValue(ListPreference prefs, int resId, String value) {
+	private void setPreferenceSummaryValue(ListPreference prefs, int resId, String value) {
 		prefs.setSummary(
 				String.format(Locale.getDefault(), getString(resId), value)
 		);

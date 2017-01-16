@@ -17,10 +17,6 @@
 
 package org.cosinus.launchertv;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -30,23 +26,6 @@ import android.view.WindowManager;
 import org.cosinus.launchertv.fragments.ApplicationFragment;
 
 public class Launcher extends FragmentActivity {
-	public static Drawable getWindowBackground(final Context context) {
-		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.windowBackground});
-		try {
-			return a.getDrawable(0);
-		} finally {
-			a.recycle();
-		}
-	}
-
-	public static int getColorBackground(final Context context) {
-		final TypedArray a = context.obtainStyledAttributes(new int[]{android.R.attr.colorBackground});
-		try {
-			return a.getColor(0, Color.TRANSPARENT);
-		} finally {
-			a.recycle();
-		}
-	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

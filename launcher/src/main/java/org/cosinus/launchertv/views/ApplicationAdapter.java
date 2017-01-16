@@ -18,6 +18,7 @@
 package org.cosinus.launchertv.views;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,8 +36,9 @@ public class ApplicationAdapter extends ArrayAdapter<AppInfo> {
 		mResource = resId;
 	}
 
+	@NonNull
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 		View view;
 
 		if (convertView == null) {
@@ -48,11 +50,12 @@ public class ApplicationAdapter extends ArrayAdapter<AppInfo> {
 		TextView packageName = (TextView) view.findViewById(R.id.application_name);
 		AppInfo appInfo = getItem(position);
 
-		view.setTag(appInfo);
-		packageName.setText(appInfo.getName());
-		if (appInfo.getIcon() != null)
-			packageImage.setImageDrawable(appInfo.getIcon());
-
+		if (appInfo != null) {
+			view.setTag(appInfo);
+			packageName.setText(appInfo.getName());
+			if (appInfo.getIcon() != null)
+				packageImage.setImageDrawable(appInfo.getIcon());
+		}
 		return (view);
 	}
 }

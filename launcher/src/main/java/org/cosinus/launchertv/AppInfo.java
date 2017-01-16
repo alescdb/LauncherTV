@@ -21,14 +21,15 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 
 
 public class AppInfo {
-	private Drawable mIcon;
+	private final Drawable mIcon;
 	private String mName;
-	private String mPackageName;
+	private final String mPackageName;
 
-	public AppInfo(PackageManager packageManager, ResolveInfo resolveInfo) {
+	AppInfo(PackageManager packageManager, ResolveInfo resolveInfo) {
 		mPackageName = resolveInfo.activityInfo.packageName;
 		mIcon = resolveInfo.loadIcon(packageManager);
 		try {
@@ -48,8 +49,12 @@ public class AppInfo {
 		}
 	}
 
+
+	@NonNull
 	public String getName() {
-		return mName;
+		if (mName != null)
+			return mName;
+		return ("");
 	}
 
 	public Drawable getIcon() {

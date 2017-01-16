@@ -16,6 +16,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:orientation="vertical"
@@ -24,7 +25,7 @@
 	<GridView
 		android:id="@+id/list"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="0dp"
 		android:layout_weight="1"
 		android:columnWidth="96dp"
 		android:gravity="center"
@@ -44,14 +45,16 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:src="@drawable/content_discard"/>
+			android:src="@drawable/ic_delete"
+			tools:ignore="ContentDescription"/>
 
 		<ImageButton
 			android:id="@+id/cancel"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:src="@drawable/navigation_cancel"/>
+			android:src="@drawable/ic_close"
+			tools:ignore="ContentDescription"/>
 
 	</LinearLayout>
 </LinearLayout>

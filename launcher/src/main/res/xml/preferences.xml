@@ -88,7 +88,7 @@
 	<PreferenceCategory android:title="@string/about">
 		<Preference
 			android:key="preference_about"
-			android:title="@string/app_name"></Preference>
+			android:title="@string/app_name" />
 		<Preference
 			android:key="preference_google_plus"
 			android:title="@string/title_google_plus">

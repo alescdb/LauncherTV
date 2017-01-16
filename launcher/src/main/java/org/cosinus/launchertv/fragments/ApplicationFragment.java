@@ -47,9 +47,10 @@ import org.cosinus.launchertv.views.ApplicationView;
 import java.text.DateFormat;
 import java.util.Date;
 
+@SuppressWarnings("PointlessBooleanExpression")
 public class ApplicationFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 	public static final String TAG = "ApplicationFragment";
-	public static final String PREFERENCES_NAME = "applications";
+	private static final String PREFERENCES_NAME = "applications";
 	private static final int REQUEST_CODE_APPLICATION_LIST = 0x1E;
 	private static final int REQUEST_CODE_WALLPAPER = 0x1F;
 	private static final int REQUEST_CODE_APPLICATION_START = 0x20;
@@ -60,8 +61,8 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	private DateFormat mTimeFormat;
 	private DateFormat mDateFormat;
 
-	private Handler mHandler = new Handler();
-	private Runnable mTimerTick = new Runnable() {
+	private final Handler mHandler = new Handler();
+	private final Runnable mTimerTick = new Runnable() {
 		@Override
 		public void run() {
 			setClock();
@@ -82,18 +83,6 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 
 	public static ApplicationFragment newInstance() {
 		return new ApplicationFragment();
-	}
-
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	/*
-	if(getArguments() != null)
-    {
-      mParam1 = getArguments().getString(ARG_PARAM1);
-      mParam2 = getArguments().getString(ARG_PARAM2);
-    }
-    */
 	}
 
 	@Override
@@ -175,7 +164,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		setApplicationOrder();
 	}
 
-	public void setApplicationOrder() {
+	private void setApplicationOrder() {
 		for (int y = 0; y < mGridY; y++) {
 			for (int x = 0; x < mGridX; x++) {
 				int upId = R.id.application_grid;
@@ -309,7 +298,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		return (5);
 	}
 
-	public void restartActivity() {
+	private void restartActivity() {
 		Intent intent = getActivity().getIntent();
 		getActivity().finish();
 		startActivity(intent);
@@ -319,14 +308,14 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	private void writePreferences(int appNum, String packageName) {
 		SharedPreferences prefs = getActivity().getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = prefs.edit();
-		String key = String.format(ApplicationView.getPreferenceKey(appNum));
+		String key = ApplicationView.getPreferenceKey(appNum);
 
 		if (TextUtils.isEmpty(packageName))
 			editor.remove(key);
 		else
 			editor.putString(key, packageName);
 
-		editor.commit();
+		editor.apply();
 	}
 
 	private void setApplication(PackageManager pm, ApplicationView app, String packageName) {
@@ -341,7 +330,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 							.setPackageName(appInfo.getPackageName());
 				}
 			} else {
-				app.setImageResource(R.drawable.ic_add_white_24dp)
+				app.setImageResource(R.drawable.ic_add)
 						.setText("")
 						.setPackageName(null);
 			}

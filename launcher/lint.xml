@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
   ~ Simple TV Launcher
   ~ Copyright 2017 Alexandre Del Bigio
@@ -15,9 +16,6 @@
   ~ limitations under the License.
   -->
 
-<FrameLayout xmlns:tools="http://schemas.android.com/tools"
-			 android:id="@+id/container"
-			 xmlns:android="http://schemas.android.com/apk/res/android"
-			 android:layout_width="match_parent"
-			 android:layout_height="match_parent"
-			 tools:ignore="MergeRootFrame"/>
+<lint>
+	<issue id="MissingTranslation" severity="ignore"/>
+</lint>

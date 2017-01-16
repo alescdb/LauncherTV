@@ -42,6 +42,11 @@ android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
 
+    lintOptions {
+        abortOnError true
+        lintConfig file('lint.xml')
+    }
+
     defaultConfig {
         applicationId "org.cosinus.launchertv"
         minSdkVersion 14

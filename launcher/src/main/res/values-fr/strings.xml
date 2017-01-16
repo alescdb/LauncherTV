@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 	<string name="about">A propos</string>
 	<string name="app_grid">Taille de la grille</string>
 	<string name="summary_background">Fond d\'écran</string>
@@ -37,5 +37,5 @@
 	<string name="title_show_date">Afficher la date</string>
 	<string name="title_show_name">Afficher les noms</string>
 	<string name="title_system">Paramètres système</string>
-	<string name="title_transparency">Transparence du fond</string>
+	<string name="title_transparency" tools:ignore="UnusedResources">Transparence du fond</string>
 </resources>

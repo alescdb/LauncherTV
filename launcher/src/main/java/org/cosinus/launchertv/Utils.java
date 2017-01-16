@@ -35,11 +35,11 @@ public class Utils {
 		Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
 		mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
 		List<ResolveInfo> intentActivities = packageManager.queryIntentActivities(mainIntent, 0);
-		List<AppInfo> entries = new ArrayList<AppInfo>();
+		List<AppInfo> entries = new ArrayList<>();
 
 		if (intentActivities != null) {
 			for (ResolveInfo resolveInfo : intentActivities) {
-				if (context.getPackageName().equals(resolveInfo.activityInfo.packageName) == false)
+				if (!context.getPackageName().equals(resolveInfo.activityInfo.packageName))
 					entries.add(new AppInfo(packageManager, resolveInfo));
 			}
 		}

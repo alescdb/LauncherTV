@@ -16,11 +16,13 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:gravity="center_vertical"
 			  android:orientation="horizontal"
-			  android:padding="5dp">
+			  android:padding="5dp"
+			  tools:ignore="UseCompoundDrawables">
 
 	<ImageView
 		android:id="@+id/application_icon"
@@ -28,7 +30,8 @@
 		android:layout_height="48dp"
 		android:duplicateParentState="true"
 		android:focusable="false"
-		android:src="@mipmap/ic_launcher"/>
+		android:src="@mipmap/ic_launcher"
+		tools:ignore="ContentDescription"/>
 
 	<TextView
 		android:id="@+id/application_name"
@@ -36,9 +39,11 @@
 		android:layout_height="wrap_content"
 		android:duplicateParentState="true"
 		android:focusable="false"
+		android:maxLines="1"
 		android:paddingLeft="10dp"
-		android:singleLine="true"
-		android:text="Application"
+		android:paddingStart="10dp"
+		android:paddingRight="10dp"
+		android:text="@string/test_application"
 		android:textAppearance="?android:attr/textAppearanceMedium"/>
 </LinearLayout>
 

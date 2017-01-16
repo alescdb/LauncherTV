@@ -44,7 +44,7 @@ public class ApplicationList extends Activity implements AdapterView.OnItemClick
 	private int mApplication = -1;
 	private int mViewType = 0;
 	private AbsListView mListView;
-	AsyncTask<Void, Void, AppInfo[]> mApplicationLoader = new AsyncTask<Void, Void, AppInfo[]>() {
+	private final AsyncTask<Void, Void, AppInfo[]> mApplicationLoader = new AsyncTask<Void, Void, AppInfo[]>() {
 		@Override
 		protected AppInfo[] doInBackground(Void... params) {
 			return Utils.loadApplications(ApplicationList.this).toArray(new AppInfo[0]);
@@ -82,8 +82,8 @@ public class ApplicationList extends Activity implements AdapterView.OnItemClick
 		mApplicationLoader.execute();
 
 		View v;
-		if ((args != null) && (args.containsKey(SHOW_DELETE) == true)) {
-			if (args.getBoolean(SHOW_DELETE) == false) {
+		if ((args != null) && (args.containsKey(SHOW_DELETE))) {
+			if (!args.getBoolean(SHOW_DELETE)) {
 				if ((v = findViewById(R.id.bottom_panel)) != null)
 					v.setVisibility(View.GONE);
 			}
@@ -94,7 +94,7 @@ public class ApplicationList extends Activity implements AdapterView.OnItemClick
 			v.setOnClickListener(this);
 	}
 
-	public AbsListView getListView() {
+	private AbsListView getListView() {
 		return mListView;
 	}
 

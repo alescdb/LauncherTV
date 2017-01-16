@@ -19,6 +19,7 @@ package org.cosinus.launchertv.views;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -54,8 +55,10 @@ public class ApplicationView extends LinearLayout {
 		return (String.format(Locale.getDefault(), "application_%02d", appNum));
 	}
 
+	@SuppressWarnings("UnusedParameters")
 	private void initialize(Context context, AttributeSet attrs, Integer defStyle) {
 		inflate(context, R.layout.application, this);
+
 		setClickable(true);
 		setFocusable(true);
 		setBackgroundResource(R.drawable.application_selector);
@@ -64,7 +67,8 @@ public class ApplicationView extends LinearLayout {
 		mText = (TextView) findViewById(R.id.application_name);
 	}
 
-	public ApplicationView setImageResource(int res) {
+	@SuppressWarnings("SameParameterValue")
+	public ApplicationView setImageResource(@DrawableRes int res) {
 		mIcon.setImageResource(res);
 		return (this);
 	}
@@ -89,6 +93,7 @@ public class ApplicationView extends LinearLayout {
 		return mPackageName;
 	}
 
+	@SuppressWarnings("UnusedReturnValue")
 	public ApplicationView setPackageName(String packageName) {
 		mPackageName = packageName;
 		return (this);
@@ -99,7 +104,7 @@ public class ApplicationView extends LinearLayout {
 	}
 
 	public boolean hasPackage() {
-		return TextUtils.isEmpty(mPackageName) == false;
+		return !TextUtils.isEmpty(mPackageName);
 	}
 
 	public int getPosition() {
