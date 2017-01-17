@@ -18,7 +18,7 @@
   ~ limitations under the License.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 	<string name="title_screen_always_on">Obrazovka vždy zapnutá</string>
 	<string name="summary_screen_always_on">Udržovat obrazovku stále zapnutou</string>
 	<string name="app_grid">Rozložení mřížky</string>
@@ -39,6 +39,8 @@
 	<string name="title_margin_y">Okraje ikon ve směru osy Y</string>
 	<string name="summary_margin_x">Šířka volného místa mezi ikonami: %s dp</string>
 	<string name="summary_margin_y">Výška volného místa mezi ikonami: %s dp</string>
-	<string name="title_transparency" tools:ignore="UnusedResources">Průhlednost pozadí</string>
 	<string name="about">O aplikaci</string>
+	<string name="title_default_transparency">Použít starší dlažba průhlednost</string>
+	<string name="summary_default_transparency">Použít starší dlažba průhlednost</string>
+	<string name="title_transparency">Průhlednost pozadí</string>
 </resources>

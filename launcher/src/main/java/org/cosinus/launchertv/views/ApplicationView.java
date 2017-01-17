@@ -18,16 +18,12 @@
 package org.cosinus.launchertv.views;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
-import android.preference.PreferenceManager;
 import android.support.annotation.DrawableRes;
-import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.StateSet;
@@ -36,7 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.cosinus.launchertv.R;
-import org.cosinus.launchertv.activities.Preferences;
+import org.cosinus.launchertv.Setup;
 
 import java.util.Locale;
 
@@ -45,7 +41,6 @@ public class ApplicationView extends LinearLayout {
 	private TextView mText;
 	private String mPackageName;
 	private int mPosition;
-	private float mTransparency;
 
 	public ApplicationView(Context context) {
 		super(context);
@@ -66,41 +61,47 @@ public class ApplicationView extends LinearLayout {
 		return (String.format(Locale.getDefault(), "application_%02d", appNum));
 	}
 
-	private float getTransparency() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			return (prefs.getFloat(Preferences.PREFERENCE_TRANSPARENCY, 0.5F));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (0.5F);
+	private static Drawable createTileShape(int backgroundColor, int borderColor) {
+		GradientDrawable shape = new GradientDrawable();
+		shape.setShape(GradientDrawable.RECTANGLE);
+		shape.setCornerRadii(new float[]{7, 7, 7, 7, 0, 0, 0, 0});
+		shape.setColor(backgroundColor);
+		shape.setStroke(1, borderColor);
+		shape.setBounds(7, 7, 7, 7);
+		return (shape);
 	}
 
-	@SuppressWarnings("deprecation")
-	@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-	private void setBackgroundStateDrawable() {
-		Resources.Theme theme = getContext().getTheme();
-		Drawable drawableEnabled = this.getResources().getDrawable(R.drawable.application_normal, theme);
-		Drawable drawableFocused = this.getResources().getDrawable(R.drawable.application_focused, theme);
-		Drawable drawablePressed = this.getResources().getDrawable(R.drawable.application_pressed, theme);
-
-		drawableEnabled.setColorFilter(Color.argb(getTransparency(0), 0xF0, 0xF0, 0xF0), PorterDuff.Mode.SRC);
-		drawableFocused.setColorFilter(Color.argb(getTransparency(0.2F), 0xE0, 0xE0, 0xFF), PorterDuff.Mode.SRC);
-		drawablePressed.setColorFilter(Color.argb(getTransparency(0.2F), 0xE0, 0xE0, 0xFF), PorterDuff.Mode.SRC);
-
+	private void setBackgroundStateDrawable(float transparency) {
 		StateListDrawable stateListDrawable = new StateListDrawable();
-		stateListDrawable.addState(new int[]{
-				android.R.attr.state_focused,
-				android.R.attr.state_selected,
-				android.R.attr.state_hovered}, drawableFocused);
+
+		Drawable drawableEnabled = createTileShape(
+				Color.argb(getTransparency(transparency, 0.0F), 0xF0, 0xF0, 0xF0),
+				Color.argb(0xFF, 0x90, 0x90, 0x90)
+		);
+		Drawable drawableFocused = createTileShape(
+				Color.argb(getTransparency(transparency, 0.4F), 0xE0, 0xE0, 0xFF),
+				Color.argb(0xFF, 0x90, 0x90, 0x90)
+		);
+		Drawable drawablePressed = createTileShape(
+				Color.argb(getTransparency(transparency, 0.8F), 0xE0, 0xE0, 0xFF),
+				Color.argb(0xFF, 0x00, 0x00, 0x00)
+		);
+
 		stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
+		stateListDrawable.addState(new int[]{android.R.attr.state_focused}, drawableFocused);
+		stateListDrawable.addState(new int[]{android.R.attr.state_hovered}, drawableFocused);
 		stateListDrawable.addState(StateSet.WILD_CARD, drawableEnabled);
 
-		setBackground(stateListDrawable);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			setBackground(stateListDrawable);
+		} else {
+			//noinspection deprecation
+			setBackgroundDrawable(stateListDrawable);
+		}
 	}
 
-	private int getTransparency(float add) {
-		int trans = (int) ((mTransparency + add) * 255.0);
+	private int getTransparency(float transparency, float add) {
+		int trans = (int) ((transparency + add) * 255.0);
 		if (trans > 255)
 			return (255);
 		if (trans < 0)
@@ -110,18 +111,18 @@ public class ApplicationView extends LinearLayout {
 
 	@SuppressWarnings("UnusedParameters")
 	private void initialize(Context context, AttributeSet attrs, Integer defStyle) {
+		Setup setup = new Setup(context);
+
 		inflate(context, R.layout.application, this);
-		mTransparency = getTransparency();
 
 		setClickable(true);
 		setFocusable(true);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			setBackgroundStateDrawable();
+		if (!setup.isDefaultTransparency()) {
+			setBackgroundStateDrawable(setup.getTransparency());
 		} else {
 			setBackgroundResource(R.drawable.application_selector);
 		}
-
 
 		mIcon = (ImageView) findViewById(R.id.application_icon);
 		mText = (TextView) findViewById(R.id.application_name);

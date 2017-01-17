@@ -22,35 +22,38 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
 
 import org.cosinus.launchertv.R;
+import org.cosinus.launchertv.Setup;
 
 import java.util.Locale;
 
 @SuppressWarnings("deprecation")
 public class Preferences extends PreferenceActivity {
-
-	private static final String CATEGORY_GRID = "category_grid";
+	public static final String PREFERENCE_DEFAULT_TRANSPARENCY = "preference_default_transparency";
+	public static final String PREFERENCE_TRANSPARENCY = "preference_transparency";
 	public static final String PREFERENCE_SCREEN_ON = "preference_screen_always_on";
 	public static final String PREFERENCE_SHOW_DATE = "preference_show_date";
 	public static final String PREFERENCE_GRID_X = "preference_grid_x";
 	public static final String PREFERENCE_GRID_Y = "preference_grid_y";
 	public static final String PREFERENCE_SHOW_NAME = "preference_show_name";
 	public static final String PREFERENCE_MARGIN_X = "preference_margin_x";
-	public static final String PREFERENCE_TRANSPARENCY = "preference_transparency";
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
+	//
+	// private static final String CATEGORY_GRID = "category_grid";
+	// private static final String CATEGORY_TRANSPARENCY = "category_transparency";
 	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
 	private static final String PREFERENCE_ABOUT = "preference_about";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		Setup setup = new Setup(this);
 		addPreferencesFromResource(R.xml.preferences);
 
 		bindSummary(PREFERENCE_GRID_X, R.string.summary_grid_x);
@@ -58,14 +61,14 @@ public class Preferences extends PreferenceActivity {
 		bindSummary(PREFERENCE_MARGIN_X, R.string.summary_margin_x);
 		bindSummary(PREFERENCE_MARGIN_Y, R.string.summary_margin_y);
 
-		try {
-			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-				PreferenceCategory preferenceCategory = (PreferenceCategory) findPreference(CATEGORY_GRID);
-				preferenceCategory.removePreference(findPreference(PREFERENCE_TRANSPARENCY));
+		findPreference(PREFERENCE_TRANSPARENCY).setEnabled(!setup.isDefaultTransparency());
+		findPreference(PREFERENCE_DEFAULT_TRANSPARENCY).setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				findPreference(PREFERENCE_TRANSPARENCY).setEnabled(!(boolean) newValue);
+				return true;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		});
 
 		findPreference(PREFERENCE_GOOGLE_PLUS).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override

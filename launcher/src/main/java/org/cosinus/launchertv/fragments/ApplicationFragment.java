@@ -26,7 +26,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -39,6 +38,7 @@ import android.widget.Toast;
 
 import org.cosinus.launchertv.AppInfo;
 import org.cosinus.launchertv.R;
+import org.cosinus.launchertv.Setup;
 import org.cosinus.launchertv.Utils;
 import org.cosinus.launchertv.activities.ApplicationList;
 import org.cosinus.launchertv.activities.Preferences;
@@ -75,6 +75,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	private ApplicationView[][] mApplications = null;
 	private View mSettings;
 	private View mGridView;
+	private Setup mSetup;
 
 
 	public ApplicationFragment() {
@@ -89,6 +90,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_application, container, false);
 
+		mSetup = new Setup(getContext());
 		mContainer = (LinearLayout) view.findViewById(R.id.container);
 		mSettings = view.findViewById(R.id.settings);
 		mGridView = view.findViewById(R.id.application_grid);
@@ -98,10 +100,10 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		mTimeFormat = android.text.format.DateFormat.getTimeFormat(getActivity());
 		mDateFormat = android.text.format.DateFormat.getLongDateFormat(getActivity());
 
-		if (keepScreenOn())
+		if (mSetup.keepScreenOn())
 			mContainer.setKeepScreenOn(true);
 
-		if (showDate() == false)
+		if (mSetup.showDate() == false)
 			mDate.setVisibility(View.GONE);
 
 		mSettings.setOnClickListener(this);
@@ -115,18 +117,18 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	private void createApplications() {
 		mContainer.removeAllViews();
 
-		mGridX = getGridX();
-		mGridY = getGridY();
+		mGridX = mSetup.getGridX();
+		mGridY = mSetup.getGridY();
 
 		if (mGridX < 2)
 			mGridX = 2;
 		if (mGridY < 1)
 			mGridY = 1;
 
-		int marginX = Utils.getPixelFromDp(getContext(), getMarginX());
-		int marginY = Utils.getPixelFromDp(getContext(), getMarginY());
+		int marginX = Utils.getPixelFromDp(getContext(), mSetup.getMarginX());
+		int marginY = Utils.getPixelFromDp(getContext(), mSetup.getMarginY());
 
-		boolean showNames = showNames();
+		boolean showNames = mSetup.showNames();
 
 		mApplications = new ApplicationView[mGridY][mGridX];
 
@@ -219,84 +221,6 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		}
 	}
 
-	private boolean keepScreenOn() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			return (prefs.getBoolean(Preferences.PREFERENCE_SCREEN_ON, false));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (false);
-	}
-
-	private boolean showDate() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			return (prefs.getBoolean(Preferences.PREFERENCE_SHOW_DATE, true));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (true);
-	}
-
-	private boolean showNames() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			return (prefs.getBoolean(Preferences.PREFERENCE_SHOW_NAME, true));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (true);
-	}
-
-
-	private int getGridX() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			String value = prefs.getString(Preferences.PREFERENCE_GRID_X, null);
-			if (value != null)
-				return (Integer.parseInt(value));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (mGridX);
-	}
-
-	private int getGridY() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			String value = prefs.getString(Preferences.PREFERENCE_GRID_Y, null);
-			if (value != null)
-				return (Integer.parseInt(value));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (mGridY);
-	}
-
-	private int getMarginX() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			String value = prefs.getString(Preferences.PREFERENCE_MARGIN_X, null);
-			if (value != null)
-				return (Integer.parseInt(value));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (5);
-	}
-
-	private int getMarginY() {
-		try {
-			SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-			String value = prefs.getString(Preferences.PREFERENCE_MARGIN_Y, null);
-			if (value != null)
-				return (Integer.parseInt(value));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return (5);
-	}
 
 	private void restartActivity() {
 		Intent intent = getActivity().getIntent();

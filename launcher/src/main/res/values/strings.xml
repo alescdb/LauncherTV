@@ -15,7 +15,7 @@
   ~ limitations under the License.
   -->
 
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 	<string name="title_screen_always_on">Screen always on</string>
 	<string name="summary_screen_always_on">Keep screen on</string>
 	<string name="app_grid">Grid size</string>
@@ -36,6 +36,8 @@
 	<string name="title_margin_y">Icons margins Y</string>
 	<string name="summary_margin_x">Width of space between icons: %s dp</string>
 	<string name="summary_margin_y">Height of space between icons: %s dp</string>
-	<string name="title_transparency" tools:ignore="UnusedResources">Background transparency</string>
+	<string name="title_transparency">Background transparency</string>
+	<string name="title_default_transparency">Default transparency</string>
+	<string name="summary_default_transparency">Use legacy tiles transparency</string>
 	<string name="about">About</string>
 </resources>

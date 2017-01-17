@@ -58,6 +58,7 @@ public class Setup {
 		return (defaultValue);
 	}
 
+	@SuppressWarnings("BooleanMethodIsAlwaysInverted")
 	public boolean isDefaultTransparency() {
 		try {
 			return (getPreferences().getBoolean(PREFERENCE_DEFAULT_TRANSPARENCY, true));
