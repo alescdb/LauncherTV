@@ -25,7 +25,7 @@ addons:
     notification_email: alescdb@users.noreply.github.com
     build_command_prepend: "./gradlew clean"
     build_command: "./gradlew assemble"
-    branch_pattern: coverity_scan
+    branch_pattern: master
 
 android:
   components:
