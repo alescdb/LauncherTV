@@ -26,7 +26,9 @@ import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.StateSet;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -36,7 +38,10 @@ import org.cosinus.launchertv.Setup;
 
 import java.util.Locale;
 
+import static android.content.ContentValues.TAG;
+
 public class ApplicationView extends LinearLayout {
+	private OnClickListener mMenuClickListener;
 	private ImageView mIcon;
 	private TextView mText;
 	private String mPackageName;
@@ -69,6 +74,23 @@ public class ApplicationView extends LinearLayout {
 		shape.setStroke(1, borderColor);
 		shape.setBounds(7, 7, 7, 7);
 		return (shape);
+	}
+
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		Log.d(TAG, "keyCode => " + keyCode);
+		if (keyCode == KeyEvent.KEYCODE_MENU) {
+			if (mMenuClickListener != null) {
+				mMenuClickListener.onClick(this);
+			}
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+	public void setOnMenuOnClickListener(OnClickListener clickListener) {
+		mMenuClickListener = clickListener;
 	}
 
 	private void setBackgroundStateDrawable(float transparency) {

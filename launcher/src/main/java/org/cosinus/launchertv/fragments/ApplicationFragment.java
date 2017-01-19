@@ -146,6 +146,12 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 				ApplicationView av = new ApplicationView(getContext());
 				av.setOnClickListener(this);
 				av.setOnLongClickListener(this);
+				av.setOnMenuOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onLongClick(v);
+					}
+				});
 				av.setPosition(position++);
 				av.showName(showNames);
 				if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
