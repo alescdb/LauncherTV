@@ -47,4 +47,4 @@ script:
   - ./gradlew checkStyle build connectedCheck
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
-after_success: ./gradlew coveralls
+after_success: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
