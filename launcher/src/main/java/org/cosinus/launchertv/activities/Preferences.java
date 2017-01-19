@@ -26,6 +26,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.widget.Toast;
 
 import org.cosinus.launchertv.R;
 import org.cosinus.launchertv.Setup;
@@ -47,6 +48,7 @@ public class Preferences extends PreferenceActivity {
 	// private static final String CATEGORY_GRID = "category_grid";
 	// private static final String CATEGORY_TRANSPARENCY = "category_transparency";
 	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
+	private static final String PREFERENCE_GITHUB = "preference_github";
 	private static final String PREFERENCE_ABOUT = "preference_about";
 
 	@Override
@@ -73,7 +75,28 @@ public class Preferences extends PreferenceActivity {
 		findPreference(PREFERENCE_GOOGLE_PLUS).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/b/104214327962194685169/104214327962194685169/posts")));
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/b/104214327962194685169/104214327962194685169/posts")));
+				} catch (Exception e) {
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(),
+							String.format(getString(R.string.error_opening_link), "Google+", e.getMessage()),
+							Toast.LENGTH_LONG).show();
+				}
+				return (true);
+			}
+		});
+		findPreference(PREFERENCE_GITHUB).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/alescdb/LauncherTV")));
+				} catch (Exception e) {
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(),
+							String.format(getString(R.string.error_opening_link), "Github", e.getMessage()),
+							Toast.LENGTH_LONG).show();
+				}
 				return (true);
 			}
 		});
@@ -91,7 +114,14 @@ public class Preferences extends PreferenceActivity {
 		findPreference(PREFERENCE_ABOUT).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=org.cosinus.launchertv")));
+				try {
+					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=org.cosinus.launchertv")));
+				} catch (Exception e) {
+					e.printStackTrace();
+					Toast.makeText(getApplicationContext(),
+							String.format(getString(R.string.error_opening_link), "Play Store", e.getMessage()),
+							Toast.LENGTH_LONG).show();
+				}
 				return (true);
 			}
 		});

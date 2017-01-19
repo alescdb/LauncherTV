@@ -33,7 +33,9 @@
 			android:summary="@string/summary_show_name"
 			android:title="@string/title_show_name"/>
 	</PreferenceCategory>
-	<PreferenceCategory android:key="category_grid" android:title="@string/app_grid">
+	<PreferenceCategory
+		android:key="category_grid"
+		android:title="@string/app_grid">
 		<ListPreference
 			android:defaultValue="3"
 			android:entries="@array/grid_x"
@@ -63,18 +65,20 @@
 			android:summary="@string/summary_margin_y"
 			android:title="@string/title_margin_y"/>
 	</PreferenceCategory>
-	<PreferenceCategory android:key="category_transparency" android:title="@string/title_transparency">
+	<PreferenceCategory
+		android:key="category_transparency"
+		android:title="@string/title_transparency">
 		<CheckBoxPreference
 			android:defaultValue="true"
 			android:key="preference_default_transparency"
 			android:summary="@string/summary_default_transparency"
 			android:title="@string/title_default_transparency"/>
 		<org.cosinus.launchertv.views.SliderPreference
-			android:key="preference_transparency"
-			android:dialogMessage="@string/title_transparency"
 			android:defaultValue="@string/transparency_default"
+			android:dialogMessage="@string/title_transparency"
+			android:key="preference_transparency"
 			android:summary="@array/transparency_values"
-			android:title="@string/title_transparency" />
+			android:title="@string/title_transparency"/>
 	</PreferenceCategory>
 	<PreferenceCategory android:title="@string/system">
 		<Preference
@@ -93,11 +97,14 @@
 	<PreferenceCategory android:title="@string/about">
 		<Preference
 			android:key="preference_about"
-			android:title="@string/app_name" />
+			android:title="@string/app_name"/>
 		<Preference
 			android:key="preference_google_plus"
 			android:title="@string/title_google_plus">
-			<intent android:action="android.settings.SETTINGS"/>
+		</Preference>
+		<Preference
+			android:key="preference_github"
+			android:title="@string/title_github">
 		</Preference>
 	</PreferenceCategory>
 </PreferenceScreen>

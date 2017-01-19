@@ -40,4 +40,5 @@
 	<string name="title_default_transparency">Default transparency</string>
 	<string name="summary_default_transparency">Use legacy tiles transparency</string>
 	<string name="about">About</string>
+	<string name="error_opening_link">Error (%1$s) : %2$s</string>
 </resources>

@@ -18,11 +18,13 @@
 <resources>
 	<string name="app_name" translatable="false">Simple TV Launcher</string>
 	<string name="title_google_plus" translatable="false">Google+</string>
-    <string name="test_clock" translatable="false">00:00</string>
-    <string name="test_date" translatable="false">Sunday 1, January</string>
+	<string name="test_clock" translatable="false">00:00</string>
+	<string name="test_date" translatable="false">Sunday 1, January</string>
 	<string name="test_application" translatable="false">Application</string>
 	<string name="transparency_default" translatable="false">0.4</string>
-    <string-array name="grid_x" translatable="false">
+	<string name="title_github" translatable="false">Github</string>
+
+	<string-array name="grid_x" translatable="false">
 		<item>2</item>
 		<item>3</item>
 		<item>4</item>
