@@ -2,8 +2,7 @@ Status
 ----------------
 
   [![Build Status](https://travis-ci.org/alescdb/LauncherTV.svg?branch=master)](https://travis-ci.org/alescdb/LauncherTV)
-  [![Coverity Scan Build Status](https://scan.coverity.com/projects/11428/badge.svg)](https://scan.coverity.com/projects/alescdb-launchertv)
-
+  [![Coverage Status](https://coveralls.io/repos/github/alescdb/LauncherTV/badge.svg)](https://coveralls.io/github/alescdb/LauncherTV) 
 
 Google Play
 ----------------
