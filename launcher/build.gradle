@@ -16,6 +16,7 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.kt3k.coveralls'
 apply plugin: 'checkstyle'
 
 checkstyle {
@@ -78,6 +79,10 @@ android {
                 //noinspection GroovyAssignabilityCheck
                 signingConfig signingConfigs.release
             }
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            testCoverageEnabled true
         }
     }
 }
