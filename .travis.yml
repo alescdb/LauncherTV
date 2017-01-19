@@ -5,7 +5,7 @@ sudo: true  # For the 7.5GB limit
 env:
   global:
     # Coverity
-    - secure: "M5aJrXG5FB+iNjcanVffamRSYCSkbEn14oOw3oXO7mBza8edlgWnkDefpKsvjmtw0WR8M150x4K1l4LVEDqL4qQLmancxZmSyBkcvorMs6zr4TNjYNR7oXA6Purw8gZcgCtEgwjeGUHXylujQBvj4d8zDEt1zGS3CKprMeKVzHUXqWxZb7RGseFIuikiVxp+A3HUi2fal0ueJY0OMEzW2DORMFtRXOIkZjzRI5UtsYSucnBGIWRv6chn/RNKru1uKMC543HTagUw6zP4sK4LFSIX2mH5Q2UTCFowkrXYgfva43kM2a+N6GLW0OMTfvDjf/gBNPj2I+AZg6QT8JC+dnNCMYbY7+UJSKobyFahYB7gJ6eJK/knSdfMMmiW6U44xqi+Zs5EtKyowZduY8H2+UwgjMev4WMdZcJjQl1axmgWmhSbDOBMyewlXcRSp5oMdwuEASbSc/tnqJ0fSKTsgo9qr5HJv2/7eQJTAMWgUSJrNPMTEA1dfLetbsd38wHdYnel7dmjX3UuaB9HjFql2oR8xBFwy4Z68lLuEQrpmvBSFFdXRBnKMcgflSm7ozoj8sBWkjvsnNg5vBGnkf2NHQYKbmqDJklEjgOLSExgs1zyAwJIKHlZCc0cXtqBl7DSAYGdo+Lfw7JUWyOp+R8X41dCTobtypChbukzJdobMZ4="
+    - secure: "BmQOYUOcXeEQmb2zNZuolLDG97vjycuP4m2Nt5Fm7CkXLnJKNN1wV6rBLOkqEi1eAbm9rMXjX1FP2jpr5k1FPqLuF4i3zL8eSSPHt6yNtssRn9243cIPot3NOpxEe8TwyF+G99FZmRnUspcKo0dFVqvgiVNUr9gpb7BBJkr6CO9kj9LM19YzNQLMjuqCqv9DZKzU3mlyfwH6zlkYQLfJNJXhEziaNwIc6CW07WAnSiWXyyXriH1LQ7bH+zRvLJmT7TmMkljJQgBNY2aQURTHgaLWAzQibpk9xqBr4gJliXPuC6ZoR69aSv6tE5iROgSjDmGgrfHGZ2C6bVa2HGac+FYDJfU8h8kd1eeU8ky46cYpH1zStEB+CBHoDZhfNFJ21tfEaAHNWEG9n9fbXRQlvnprLR2Job+3aTHLhmXuhqWTfICW4FsoA70+TkLiYyhBX4FytgASUkseJp74V1GMGdLwXXZoBeNKlvoljjDCyjHwK4JpABbnifK8dlljPrjHOd5tvX7AeEuYB/12GeNk7gi59rjb5YO53FOG2R0amUVIm71QCRjojYTM9SYjAHsBfXxuUopxXL8wQzw3j7v31wfEBwJvdlHArsRBn2s5e7P3FRXf7rHgL3I5Wby57phGvXyWkQojcCMcB/b+9IoKO3x1EdY3erPAh6ewklgSCfA="
 
 cache:
   directories:
@@ -35,7 +35,7 @@ android:
     - android-25
     - extra-google-m2repository
     - extra-android-m2repository
-    
+
   license:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
@@ -46,6 +46,8 @@ before_script:
 script:
   - ./gradlew checkStyle build connectedCheck
 
-after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
-after_success: ./gradlew coveralls
-
+after_failure:
+	- "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
+	
+after_success:
+	- ./gradlew coveralls
