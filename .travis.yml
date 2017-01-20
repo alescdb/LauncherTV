@@ -2,30 +2,9 @@ language: android
 jdk: oraclejdk8
 sudo: true  # For the 7.5GB limit
 
-env:
-  global:
-    - CI_NAME=travis-ci
-    - secure: "fXVDz/IW/YXRERg7cQBNTjxaa8xl8umUGdftsbHu0qjZj42v8w0bHUsj6xkH35vKaZvUkvJmdwUMrRS8fVhdT4T+LiebSbluRI7eP8dsAhEtVz37ulg7atYX3hWTcFdziOJJc76WyF2IKtdA90MoaltCkJwE2ad9UZ+wchpmU5N6GGDTOZ8FCsCET9lVP68ckqvt+6gyAx0ybsm6ks6j/y/9pzcEaOFRnEq6t9gO3DRt6pnJKl8kV2+uSeuViQbr+Dy3+FOuZM31Dt0UCJgK9tesdlg1HjwUUbEbTYFYdmFtxFbMZJ+/a8jkSU3CH2j6m7xvKGQXVpGRSh+ByzhZizpECG3gj+RXU8Ii4oFnxBZsRGUgfpExxdyFfv7PfONl3RQpS0ouuUlboBcI5WDtG4mzq7YU82+H4Llsg1SLBUxeV9aD90FxFcrVfe5Dni+Tw4hyaIVPJQWFFbftlpQ/R3JoONyg0qNZDgr/bCKZdZ1alHokwjkvXbUaJaRDdoBcpczVQN2FIhtI0nKykQ0VIoRnw37hUnqTEapP8tnq35EPzdXPNWrDTmnYzzAGPTLocqyYLhFJcxofkUMyOXwJfd4LMaaWplCUq/stL2JcrqAKcCxY6IOQA44fHc0PutzGmbWFM/i0iTdbee2uoamYuqS0UI2GRh1o2SSJxFity4I="
-
-cache:
-  directories:
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/dists/
-    - $HOME/.cache/ci-support
-    - $HOME/.cache/lint
-before_cache:
-  - find $HOME/.gradle -name "*.lock" -exec rm {} \;
-  - rm -rf $HOME/.gradle/caches/[1-9]*
-
-addons:
-  coverity_scan:
-    project:
-      name: "alescdb/LauncherTV"
-      description: "Android Simple TV Launcher"
-    notification_email: alescdb@users.noreply.github.com
-    build_command_prepend: "./gradlew clean"
-    build_command: "./gradlew assemble"
-    branch_pattern: master
+notifications:
+    email:
+      - github@cosinus.org
 
 android:
   components:
@@ -41,10 +20,10 @@ android:
     - 'google-gdk-license-.+'
 
 before_script:
-  - mkdir -p $HOME/.cache/lint
   - chmod 0755 ./gradlew
+
 script:
-  - ./gradlew checkStyle build connectedCheck
+  - ./gradlew assembleDebug
 
 after_failure: "cat $TRAVIS_BUILD_DIR/app/build/outputs/lint-results-debug.xml"
 after_success: ./gradlew coveralls

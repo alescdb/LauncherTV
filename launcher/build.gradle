@@ -90,3 +90,12 @@ android {
 dependencies {
     compile 'com.android.support:appcompat-v7:25.1.0'
 }
+
+coveralls {
+    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+}
+
+tasks.coveralls {
+    dependsOn 'connectedAndroidTest'
+    onlyIf { System.env.'CI' }
+}
