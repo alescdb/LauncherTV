@@ -41,7 +41,7 @@ task checkstyle(type: Checkstyle) {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    buildToolsVersion '26.0.2'
 
     lintOptions {
         abortOnError true
@@ -52,8 +52,8 @@ android {
         applicationId "org.cosinus.launchertv"
         minSdkVersion 14
         targetSdkVersion 25
-        versionCode 154
-        versionName "1.5.4-beta"
+        versionCode 155
+        versionName "1.5.5"
     }
 
     signingConfigs {
@@ -88,7 +88,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.4.0'
 }
 
 coveralls {

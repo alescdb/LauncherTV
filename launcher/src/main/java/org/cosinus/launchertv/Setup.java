@@ -86,6 +86,15 @@ public class Setup {
 		return (false);
 	}
 
+	public boolean iconsLocked() {
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_LOCKED, false));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (false);
+	}
+
 	public boolean showDate() {
 		try {
 			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_DATE, true));

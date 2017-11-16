@@ -293,7 +293,11 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	public boolean onLongClick(View v) {
 		if (v instanceof ApplicationView) {
 			ApplicationView appView = (ApplicationView) v;
-			openApplicationList(ApplicationList.VIEW_LIST, appView.getPosition(), appView.hasPackage(), REQUEST_CODE_APPLICATION_LIST);
+			if (appView.hasPackage() && mSetup.iconsLocked()) {
+				Toast.makeText(getActivity(), R.string.home_locked, Toast.LENGTH_SHORT).show();
+			} else {
+				openApplicationList(ApplicationList.VIEW_LIST, appView.getPosition(), appView.hasPackage(), REQUEST_CODE_APPLICATION_LIST);
+			}
 			return (true);
 		}
 		return (false);

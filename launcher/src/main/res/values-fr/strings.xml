@@ -40,4 +40,8 @@
 	<string name="summary_default_transparency">Utiliser la transparence par défaut (en cas de problème)</string>
 	<string name="title_default_transparency">Transparence par défaut</string>
 	<string name="title_transparency">Transparence du fond</string>
+	<string name="error_opening_link">Error (%1$s) : %2$s</string>
+	<string name="home_locked">Icone verrouillée (cf. Préférences)</string>
+	<string name="summary_locked">Empêcher  la suppression accidentelle des icones</string>
+	<string name="title_locked">Verrouiller les icones</string>
 </resources>

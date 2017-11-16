@@ -41,4 +41,7 @@
 	<string name="summary_default_transparency">Use legacy tiles transparency</string>
 	<string name="about">About</string>
 	<string name="error_opening_link">Error (%1$s) : %2$s</string>
+	<string name="home_locked">Icon is locked by settings</string>
+	<string name="summary_locked">Prevent icons to be accidentally removed</string>
+	<string name="title_locked">Lock icons</string>
 </resources>
