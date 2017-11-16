@@ -44,9 +44,7 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_SHOW_NAME = "preference_show_name";
 	public static final String PREFERENCE_MARGIN_X = "preference_margin_x";
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
-	//
-	// private static final String CATEGORY_GRID = "category_grid";
-	// private static final String CATEGORY_TRANSPARENCY = "category_transparency";
+	public static final String PREFERENCE_LOCKED = "preference_locked";
 	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
 	private static final String PREFERENCE_GITHUB = "preference_github";
 	private static final String PREFERENCE_ABOUT = "preference_about";
