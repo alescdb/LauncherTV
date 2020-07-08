@@ -331,7 +331,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 
 		try {
 			Toast.makeText(getActivity(), v.getName(), Toast.LENGTH_SHORT).show();
-			startActivity(getActivity().getPackageManager().getLaunchIntentForPackage(v.getPackageName()));
+			startActivity(getLaunchIntentForPackage(v.getPackageName()));
 		} catch (Exception e) {
 			Toast.makeText(getActivity(), v.getName() + " : " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
@@ -339,7 +339,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 
 	private void openApplication(String packageName) {
 		try {
-			Intent startApp = getActivity().getPackageManager().getLaunchIntentForPackage(packageName);
+			Intent startApp = getLaunchIntentForPackage(packageName);
 			Toast.makeText(getActivity(), packageName, Toast.LENGTH_SHORT).show();
 			startActivity(startApp);
 		} catch (Exception e) {
@@ -353,6 +353,17 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		intent.putExtra(ApplicationList.VIEW_TYPE, viewType);
 		intent.putExtra(ApplicationList.SHOW_DELETE, showDelete);
 		startActivityForResult(intent, requestCode);
+	}
+	
+	private Intent getLaunchIntentForPackage(String packageName) {
+		PackageManager pm = getActivity().getPackageManager();
+		Intent launchIntent = pm.getLaunchIntentForPackage(packageName);
+		
+		if(launchIntent == null) {
+			launchIntent = pm.getLeanbackLaunchIntentForPackage(packageName);
+		}
+		
+		return launchIntent;			
 	}
 
 	@Override
