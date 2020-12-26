@@ -47,4 +47,6 @@
 	<string name="home_locked">Icon is locked by settings</string>
 	<string name="summary_locked">Prevent icons to be accidentally removed</string>
 	<string name="title_locked">Lock icons</string>
+	<string name="title_show_battery_information">Zobrazit informace o baterii</string>
+	<string name="summary_show_battery_information">Zobrazit stav baterie a stav na domovské obrazovce</string>
 </resources>

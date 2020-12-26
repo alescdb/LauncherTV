@@ -39,6 +39,7 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_TRANSPARENCY = "preference_transparency";
 	public static final String PREFERENCE_SCREEN_ON = "preference_screen_always_on";
 	public static final String PREFERENCE_SHOW_DATE = "preference_show_date";
+	public static final String PREFERENCE_SHOW_BATTERY = "preference_show_battery";
 	public static final String PREFERENCE_GRID_X = "preference_grid_x";
 	public static final String PREFERENCE_GRID_Y = "preference_grid_y";
 	public static final String PREFERENCE_SHOW_NAME = "preference_show_name";

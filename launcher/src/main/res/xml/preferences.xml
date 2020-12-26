@@ -28,6 +28,11 @@
 			android:summary="@string/summary_show_date"
 			android:title="@string/title_show_date"/>
 		<CheckBoxPreference
+			android:defaultValue="false"
+			android:key="preference_show_battery"
+			android:summary="@string/summary_show_battery_information"
+			android:title="@string/title_show_battery_information"/>
+		<CheckBoxPreference
 			android:defaultValue="true"
 			android:key="preference_show_name"
 			android:summary="@string/summary_show_name"
