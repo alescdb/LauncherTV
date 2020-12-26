@@ -29,7 +29,10 @@
 	<string name="title_system">System settings</string>
 	<string name="summary_system">Open system settings</string>
 	<string name="summary_show_date">Display the date bellow time</string>
+	<string name="summary_show_battery_information">Display battery level and status in home screen</string>
 	<string name="title_show_date">Display date</string>
+	<string name="title_show_battery_information">Display battery information</string>
+	<string name="battery_level_text" translatable="false">%1d%%</string>
 	<string name="summary_show_name">Display applications names on main screen</string>
 	<string name="title_show_name">Display names</string>
 	<string name="title_margin_x">Icons margins X</string>

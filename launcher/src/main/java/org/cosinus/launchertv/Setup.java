@@ -104,6 +104,15 @@ public class Setup {
 		return (true);
 	}
 
+	public boolean showBattery() {
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_BATTERY, false));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (false);
+	}
+
 	public boolean showNames() {
 		try {
 			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_NAME, true));

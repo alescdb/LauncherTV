@@ -44,4 +44,6 @@
 	<string name="home_locked">Icone verrouillée (cf. Préférences)</string>
 	<string name="summary_locked">Empêcher  la suppression accidentelle des icones</string>
 	<string name="title_locked">Verrouiller les icones</string>
+	<string name="title_show_battery_information">Afficher les informations sur la batterie</string>
+	<string name="summary_show_battery_information">Afficher le niveau et l\'état de la batterie sur l\'écran d\'accueil</string>
 </resources>
