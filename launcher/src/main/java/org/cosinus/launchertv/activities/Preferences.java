@@ -46,7 +46,6 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_MARGIN_X = "preference_margin_x";
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
 	public static final String PREFERENCE_LOCKED = "preference_locked";
-	private static final String PREFERENCE_GOOGLE_PLUS = "preference_google_plus";
 	private static final String PREFERENCE_GITHUB = "preference_github";
 	private static final String PREFERENCE_ABOUT = "preference_about";
 
@@ -71,20 +70,6 @@ public class Preferences extends PreferenceActivity {
 			}
 		});
 
-		findPreference(PREFERENCE_GOOGLE_PLUS).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				try {
-					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://plus.google.com/b/104214327962194685169/104214327962194685169/posts")));
-				} catch (Exception e) {
-					e.printStackTrace();
-					Toast.makeText(getApplicationContext(),
-							String.format(getString(R.string.error_opening_link), "Google+", e.getMessage()),
-							Toast.LENGTH_LONG).show();
-				}
-				return (true);
-			}
-		});
 		findPreference(PREFERENCE_GITHUB).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
