@@ -51,9 +51,9 @@ android {
     defaultConfig {
         applicationId "org.cosinus.launchertv"
         minSdkVersion 14
-        targetSdkVersion 29
-        versionCode 158
-        versionName "1.5.8"
+        targetSdkVersion 30
+        versionCode 159
+        versionName "1.5.9"
     }
 
     signingConfigs {
