@@ -1,0 +1,123 @@
+name: APK release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Check version and tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          source = Path('launcher/build.gradle').read_text()
+          version = re.search(r'versionName "([^"]+)"', source).group(1)
+          code = re.search(r'versionCode (\d+)', source).group(1)
+          if os.environ['RELEASE_TAG'] not in (version, 'v' + version):
+              raise SystemExit('The tag must match versionName: ' + version + ' or v' + version)
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('VERSION=' + version + '\nVERSION_CODE=' + code + '\n')
+          PY
+
+      - name: Set up Java
+        if: ${{ env.ACT != 'true' }}
+        uses: actions/setup-java@v6.1.0
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: gradle
+
+      - name: Set up Android SDK
+        if: ${{ env.ACT != 'true' }}
+        uses: android-actions/setup-android@v4.0.4
+        with:
+          cmdline-tools-version: '16111833'
+          log-accepted-android-sdk-licenses: false
+          packages: 'platform-tools platforms;android-37.0 build-tools;36.0.0 build-tools;37.0.0'
+
+      - name: Build and check
+        run: ./gradlew --no-daemon assembleDebug assembleRelease lintDebug checkstyle
+
+      - name: Sign and verify release APK
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          set -euo pipefail
+          test -n "$ANDROID_KEYSTORE_BASE64" && test -n "$ANDROID_KEYSTORE_PASSWORD" && test -n "$ANDROID_KEY_ALIAS" || {
+            echo 'Configure ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD and ANDROID_KEY_ALIAS.' >&2
+            exit 1
+          }
+          umask 077
+          key="$RUNNER_TEMP/release.jks"
+          trap 'rm -f "$key"' EXIT
+          printf '%s' "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$key"
+          tools="$ANDROID_HOME/build-tools/37.0.0"
+          dist=launcher/build/distribution
+          mkdir -p "$dist"
+          apk="$dist/LauncherTV-$VERSION.apk"
+          "$tools/apksigner" sign --ks "$key" --ks-key-alias "$ANDROID_KEY_ALIAS" \
+            --ks-pass env:ANDROID_KEYSTORE_PASSWORD --key-pass env:ANDROID_KEYSTORE_PASSWORD \
+            --out "$apk" launcher/build/outputs/apk/release/launcher-release-unsigned.apk
+          "$tools/apksigner" verify --verbose "$apk" | tee "$RUNNER_TEMP/apk-signature.txt"
+          grep -F 'Verified using v1 scheme (JAR signing): true' "$RUNNER_TEMP/apk-signature.txt"
+          "$tools/aapt" dump badging "$apk" > "$RUNNER_TEMP/apk-info.txt"
+          grep -F "package: name='org.cosinus.launchertv' versionCode='$VERSION_CODE' versionName='$VERSION'" "$RUNNER_TEMP/apk-info.txt"
+          grep -Fx "sdkVersion:'14'" "$RUNNER_TEMP/apk-info.txt"
+          grep -Fx "targetSdkVersion:'37'" "$RUNNER_TEMP/apk-info.txt"
+          if grep -q 'application-debuggable' "$RUNNER_TEMP/apk-info.txt"; then exit 1; fi
+          cd "$dist"
+          sha256sum "LauncherTV-$VERSION.apk" > "LauncherTV-$VERSION.apk.sha256"
+
+      - name: Save release artifacts
+        if: ${{ env.ACT != 'true' }}
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: LauncherTV-${{ env.VERSION }}
+          path: |
+            launcher/build/distribution/LauncherTV-${{ env.VERSION }}.apk
+            launcher/build/distribution/LauncherTV-${{ env.VERSION }}.apk.sha256
+          if-no-files-found: error
+
+      # Le serveur d'artefacts act ne prend pas encore en charge le protocole v7.
+      - name: Save local release artifacts
+        if: ${{ env.ACT == 'true' }}
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: LauncherTV-${{ env.VERSION }}
+          path: |
+            launcher/build/distribution/LauncherTV-${{ env.VERSION }}.apk
+            launcher/build/distribution/LauncherTV-${{ env.VERSION }}.apk.sha256
+          if-no-files-found: error
+
+      - name: Publish GitHub release
+        if: ${{ env.ACT != 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            "launcher/build/distribution/LauncherTV-$VERSION.apk" \
+            "launcher/build/distribution/LauncherTV-$VERSION.apk.sha256" \
+            --verify-tag --title "LauncherTV $VERSION" --generate-notes

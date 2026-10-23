@@ -71,8 +71,8 @@ public class SliderPreference extends DialogPreference {
 	@Override
 	public CharSequence getSummary() {
 		if (mSummaries != null && mSummaries.length > 0) {
-			int index = (int) (mValue * mSummaries.length);
-			index = Math.min(index, mSummaries.length - 1);
+			int index = Math.round(mValue * (mSummaries.length - 1));
+			index = Math.max(0, Math.min(index, mSummaries.length - 1));
 			return mSummaries[index];
 		} else {
 			return super.getSummary();

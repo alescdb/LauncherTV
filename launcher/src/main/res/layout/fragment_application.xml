@@ -83,6 +83,17 @@
 		</LinearLayout>
 
 
+		<ImageView
+			android:id="@+id/network_icon"
+			android:layout_width="28dp"
+			android:layout_height="28dp"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
+			android:contentDescription="@string/network_unavailable"
+			android:focusable="false"
+			android:visibility="gone"/>
+
+
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
@@ -141,6 +152,25 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center_vertical|end">
+
+		<TextView
+			android:id="@+id/ip_address"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:layout_marginRight="10dp"
+			android:background="?android:attr/selectableItemBackground"
+			android:contentDescription="@string/ip_addresses"
+			android:ellipsize="end"
+			android:focusable="true"
+			android:maxLines="2"
+			android:shadowColor="#ff000000"
+			android:shadowDx="1"
+			android:shadowDy="1"
+			android:shadowRadius="0.5"
+			android:textColor="#ffffffff"
+			android:textSize="15sp"
+			android:visibility="gone"/>
 
 		<ImageButton
 			android:id="@+id/settings"

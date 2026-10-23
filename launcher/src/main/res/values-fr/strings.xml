@@ -16,6 +16,14 @@
   -->
 
 <resources>
+	<string name="title_screensaver">Écran de veille</string>
+	<string name="summary_screensaver">Configurer l’écran de veille</string>
+	<string name="screensaver_unavailable">Les réglages de l’écran de veille sont indisponibles sur cet appareil</string>
+	<string name="settings_unavailable">Les réglages système sont indisponibles sur cet appareil</string>
+	<string name="add_shortcut">Ajouter un raccourci</string>
+	<string name="confirm_shortcut">Ajouter %1$s à la première case vide ?</string>
+	<string name="shortcut_unavailable">Ce raccourci ne peut pas être ajouté ou ouvert</string>
+	<string name="no_empty_tile">Aucune case vide. Supprimez une icône ou agrandissez la grille.</string>
 	<string name="about">A propos</string>
 	<string name="app_grid">Taille de la grille</string>
 	<string name="summary_background">Fond d\'écran</string>
@@ -42,8 +50,78 @@
 	<string name="title_transparency">Transparence du fond</string>
 	<string name="error_opening_link">Error (%1$s) : %2$s</string>
 	<string name="home_locked">Icone verrouillée (cf. Préférences)</string>
-	<string name="summary_locked">Empêcher  la suppression accidentelle des icones</string>
+	<string name="summary_locked">Empêcher la modification des icônes et de la grille</string>
+	<string name="application_unavailable">Indisponible : %1$s</string>
 	<string name="title_locked">Verrouiller les icones</string>
 	<string name="title_show_battery_information">Afficher les informations sur la batterie</string>
 	<string name="summary_show_battery_information">Afficher le niveau et l\'état de la batterie sur l\'écran d\'accueil</string>
+	<string name="new_folder">Nouveau dossier…</string>
+	<string name="folder_name">Nom du dossier</string>
+	<string name="folder_add">Ajouter</string>
+	<string name="folder_rename">Renommer</string>
+	<string name="folder_delete">Supprimer le dossier</string>
+	<string name="folder_delete_confirm">Supprimer ce dossier et ses cases d’accueil ? Les applications resteront installées.</string>
+	<string name="folder_empty">Ce dossier est vide.</string>
+	<string name="folder_hint">Appuyez longuement sur un élément pour le retirer de ce dossier.</string>
+	<string name="folder_remove">Retirer %1$s de ce dossier ?</string>
+	<string name="folder_error">Impossible de lire ce dossier.</string>
+	<string name="protection">PIN et applications masquées</string>
+	<string name="protection_summary">Protéger les préférences, les applications et les dossiers.</string>
+	<string name="pin">PIN</string>
+	<string name="unlock">Saisissez votre PIN</string>
+	<string name="pin_enable">Définir le PIN</string>
+	<string name="pin_change">Modifier le PIN</string>
+	<string name="pin_confirm">Confirmer le PIN</string>
+	<string name="pin_format">Utilisez 4 à 8 chiffres.</string>
+	<string name="pin_mismatch">Les PIN ne correspondent pas.</string>
+	<string name="pin_invalid">PIN incorrect.</string>
+	<string name="pin_retry">Trop de tentatives. Patientez 30 secondes.</string>
+	<string name="pin_summary">Le PIN protège l’accès aux préférences et la création de raccourcis.</string>
+	<string name="hidden_apps">Applications masquées</string>
+	<string name="hidden_summary">Masquer les applications et leurs raccourcis de l’accueil et des listes. Les affectations sont conservées.</string>
+	<string name="locked_apps">Applications et dossiers protégés</string>
+	<string name="locked_summary">Demander le PIN avant d’ouvrir les éléments sélectionnés.</string>
+	<string name="protection_disable">Désactiver la protection</string>
+	<string name="protection_disable_summary">Réafficher les applications masquées et ne plus demander le PIN. Conserver les sélections pour plus tard.</string>
+	<string name="protection_limits">Protection limitée au launcher</string>
+	<string name="protection_recovery">Cette protection ne verrouille ni Android ni les autres launchers. En cas d’oubli du PIN, effacez les données du launcher dans les réglages Android : la disposition de l’accueil sera également réinitialisée.</string>
+	<string name="protection_error">Impossible d’enregistrer les réglages de protection.</string>
+	<string name="protection_category">Sécurité</string>
+	<string name="title_show_wallpaper">Afficher le fond d’écran sur l’accueil</string>
+	<string name="summary_show_wallpaper">Désactiver pour un accueil noir, sans modifier le fond d’écran Android.</string>
+	<string name="reset_wallpaper">Rétablir le fond d’écran par défaut</string>
+	<string name="summary_reset_wallpaper">Rétablir le fond d’écran d’accueil Android pour tous les launchers.</string>
+	<string name="confirm_reset_wallpaper">Rétablir le fond d’écran d’accueil Android par défaut ? Ce changement concerne tous les launchers.</string>
+	<string name="resetting_wallpaper">Rétablissement du fond d’écran…</string>
+	<string name="wallpaper_restored">Fond d’écran par défaut rétabli.</string>
+	<string name="wallpaper_error">Impossible de rétablir le fond d’écran sur cet appareil.</string>
+	<string name="wallpaper_unavailable">La sélection du fond d’écran est indisponible sur cet appareil.</string>
+	<string name="title_show_ip">Afficher les adresses IP</string>
+	<string name="summary_show_ip">Afficher les adresses locales par interface. Sélectionnez la zone des adresses pour les détails.</string>
+	<string name="ip_addresses">Adresses IP</string>
+	<string name="network_disconnected">Aucune connexion réseau</string>
+	<string name="ip_unavailable">Aucune adresse IP disponible</string>
+	<string name="network_unavailable">Informations réseau indisponibles</string>
+	<string name="choose_home_image">Choisir une image d’accueil</string>
+	<string name="summary_choose_home_image">Choisir une image pour LauncherTV uniquement (32 Mo maximum). Active l’image d’accueil.</string>
+	<string name="use_home_image">Utiliser l’image d’accueil</string>
+	<string name="summary_home_image">Désactiver pour retrouver le fond Android. Le fond Android reste inchangé.</string>
+	<string name="image_scale">Cadrage de l’image d’accueil</string>
+	<string name="image_fit">Image entière (bandes noires si nécessaire)</string>
+	<string name="image_crop">Remplir l’écran (bords coupés si nécessaire)</string>
+	<string name="image_imported">Image d’accueil enregistrée</string>
+	<string name="image_error">Impossible d’enregistrer cette image. Choisissez une image valide de 32 Mo maximum.</string>
+	<string name="image_picker_unavailable">Aucun sélecteur d’image disponible</string>
+	<string-array name="image_scale_labels">
+		<item>@string/image_fit</item>
+		<item>@string/image_crop</item>
+	</string-array>
+	<string name="title_show_network">Afficher l’icône réseau</string>
+	<string name="summary_show_network">Afficher le type de connexion près de l’horloge, sans vérifier l’accès à Internet.</string>
+	<string name="network_wifi">Wi-Fi connecté</string>
+	<string name="network_ethernet">Ethernet connecté</string>
+	<string name="network_other">Autre réseau connecté</string>
+	<string name="title_home">Accueil par défaut</string>
+	<string name="summary_home">Choisir LauncherTV comme accueil par défaut dans les réglages Android.</string>
+	<string name="home_settings_unavailable">Le choix de l’accueil est indisponible. Les réglages Android ont été ouverts.</string>
 </resources>

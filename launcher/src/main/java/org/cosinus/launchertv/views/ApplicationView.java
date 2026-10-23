@@ -29,6 +29,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.util.StateSet;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -44,7 +45,7 @@ public class ApplicationView extends LinearLayout {
 	private OnClickListener mMenuClickListener;
 	private ImageView mIcon;
 	private TextView mText;
-	private String mPackageName;
+	private String mAppId;
 	private int mPosition;
 
 	public ApplicationView(Context context) {
@@ -66,14 +67,35 @@ public class ApplicationView extends LinearLayout {
 		return (String.format(Locale.getDefault(), "application_%02d", appNum));
 	}
 
-	private static Drawable createTileShape(int backgroundColor, int borderColor) {
-		GradientDrawable shape = new GradientDrawable();
-		shape.setShape(GradientDrawable.RECTANGLE);
-		shape.setCornerRadii(new float[]{7, 7, 7, 7, 0, 0, 0, 0});
+	private Drawable createTileShape(@DrawableRes int res, int backgroundColor) {
+		GradientDrawable shape = (GradientDrawable) getResources().getDrawable(res).mutate();
 		shape.setColor(backgroundColor);
-		shape.setStroke(1, borderColor);
-		shape.setBounds(7, 7, 7, 7);
 		return (shape);
+	}
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if (MeasureSpec.getMode(heightMeasureSpec) != MeasureSpec.UNSPECIFIED) {
+			int size = getIconSize(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec));
+			LayoutParams params = (LayoutParams) mIcon.getLayoutParams();
+			params.width = size;
+			params.height = size;
+		}
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+	}
+
+	private int getIconSize(int width, int height) {
+		View content = (View) mIcon.getParent();
+		width -= getPaddingLeft() + getPaddingRight() + content.getPaddingLeft() + content.getPaddingRight();
+		height -= getPaddingTop() + getPaddingBottom() + content.getPaddingTop() + content.getPaddingBottom();
+		if (mText.getVisibility() != GONE) {
+			mText.measure(MeasureSpec.makeMeasureSpec(Math.max(0, width), MeasureSpec.AT_MOST),
+					MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
+			LayoutParams params = (LayoutParams) mText.getLayoutParams();
+			height -= mText.getMeasuredHeight() + params.topMargin + params.bottomMargin;
+		}
+		int size = getResources().getDimensionPixelSize(R.dimen.application_drawable_size);
+		return (Math.max(0, Math.min(size, Math.min(width, height))));
 	}
 
 
@@ -97,16 +119,16 @@ public class ApplicationView extends LinearLayout {
 		StateListDrawable stateListDrawable = new StateListDrawable();
 
 		Drawable drawableEnabled = createTileShape(
-				Color.argb(getTransparency(transparency, 0.0F), 0xF0, 0xF0, 0xF0),
-				Color.argb(0xFF, 0x90, 0x90, 0x90)
+				R.drawable.application_normal,
+				Color.argb(getTransparency(transparency, 0.0F), 0xF0, 0xF0, 0xF0)
 		);
 		Drawable drawableFocused = createTileShape(
-				Color.argb(getTransparency(transparency, 0.4F), 0xE0, 0xE0, 0xFF),
-				Color.argb(0xFF, 0x90, 0x90, 0x90)
+				R.drawable.application_focused,
+				Color.argb(getTransparency(transparency, 0.4F), 0xE0, 0xE0, 0xFF)
 		);
 		Drawable drawablePressed = createTileShape(
-				Color.argb(getTransparency(transparency, 0.8F), 0xE0, 0xE0, 0xFF),
-				Color.argb(0xFF, 0x00, 0x00, 0x00)
+				R.drawable.application_pressed,
+				Color.argb(getTransparency(transparency, 0.8F), 0xE0, 0xE0, 0xFF)
 		);
 
 		stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
@@ -172,13 +194,13 @@ public class ApplicationView extends LinearLayout {
 		);
 	}
 
-	public String getPackageName() {
-		return mPackageName;
+	public String getAppId() {
+		return mAppId;
 	}
 
 	@SuppressWarnings("UnusedReturnValue")
-	public ApplicationView setPackageName(String packageName) {
-		mPackageName = packageName;
+	public ApplicationView setAppId(String appId) {
+		mAppId = appId;
 		return (this);
 	}
 
@@ -186,8 +208,8 @@ public class ApplicationView extends LinearLayout {
 		return mText.getText().toString();
 	}
 
-	public boolean hasPackage() {
-		return !TextUtils.isEmpty(mPackageName);
+	public boolean hasApp() {
+		return !TextUtils.isEmpty(mAppId);
 	}
 
 	public int getPosition() {

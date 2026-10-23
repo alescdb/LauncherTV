@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Simple TV Launcher
+  ~ Copyright 2017 Alexandre Del Bigio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+	<string name="title_screen_always_on">螢幕保持開啟</string>
+	<string name="summary_screen_always_on">防止螢幕自動關閉</string>
+	<string name="app_grid">格線大小</string>
+	<string name="title_grid_x">欄數</string>
+	<string name="summary_grid_x">欄數：%s</string>
+	<string name="title_grid_y">列數</string>
+	<string name="summary_grid_y">列數：%s</string>
+	<string name="system">系統</string>
+	<string name="title_background">背景</string>
+	<string name="summary_background">設定背景圖片</string>
+	<string name="title_system">系統設定</string>
+	<string name="title_screensaver">螢幕保護程式</string>
+	<string name="summary_screensaver">開啟螢幕保護程式設定</string>
+	<string name="screensaver_unavailable">此裝置無法開啟螢幕保護程式設定</string>
+	<string name="settings_unavailable">此裝置無法開啟系統設定</string>
+	<string name="add_shortcut">新增捷徑</string>
+	<string name="confirm_shortcut">要將 %1$s 新增至第一個空白方格嗎？</string>
+	<string name="shortcut_unavailable">無法新增或開啟此捷徑</string>
+	<string name="no_empty_tile">沒有空白方格。請先移除圖示或增加格線大小。</string>
+	<string name="summary_system">開啟系統設定</string>
+	<string name="summary_show_date">在時間下方顯示日期</string>
+	<string name="summary_show_battery_information">在主畫面顯示電池電量及狀態</string>
+	<string name="title_show_date">顯示日期</string>
+	<string name="title_show_battery_information">顯示電池資訊</string>
+	<string name="summary_show_name">在主畫面顯示應用程式名稱</string>
+	<string name="title_show_name">顯示名稱</string>
+	<string name="title_margin_x">圖示水平間距</string>
+	<string name="title_margin_y">圖示垂直間距</string>
+	<string name="summary_margin_x">圖示之間的水平間距：%s dp</string>
+	<string name="summary_margin_y">圖示之間的垂直間距：%s dp</string>
+	<string name="title_transparency">背景透明度</string>
+	<string name="title_default_transparency">預設透明度</string>
+	<string name="summary_default_transparency">使用原有的方格透明度</string>
+	<string name="about">關於</string>
+	<string name="error_opening_link">錯誤（%1$s）：%2$s</string>
+	<string name="home_locked">圖示已在設定中鎖定</string>
+	<string name="application_unavailable">無法使用：%1$s</string>
+	<string name="summary_locked">防止變更圖示及格線</string>
+	<string name="title_locked">鎖定圖示</string>
+	<string name="new_folder">新增資料夾…</string>
+	<string name="folder_name">資料夾名稱</string>
+	<string name="folder_add">新增</string>
+	<string name="folder_rename">重新命名</string>
+	<string name="folder_delete">刪除資料夾</string>
+	<string name="folder_delete_confirm">要刪除此資料夾及其主畫面方格嗎？這不會解除安裝應用程式。</string>
+	<string name="folder_empty">此資料夾是空的。</string>
+	<string name="folder_hint">長按項目即可將其移出此資料夾。</string>
+	<string name="folder_remove">要將 %1$s 移出此資料夾嗎？</string>
+	<string name="folder_error">無法讀取此資料夾。</string>
+	<string name="protection">PIN 碼與隱藏應用程式</string>
+	<string name="protection_summary">保護偏好設定、應用程式及資料夾。</string>
+	<string name="pin">PIN 碼</string>
+	<string name="unlock">輸入 PIN 碼</string>
+	<string name="pin_enable">設定 PIN 碼</string>
+	<string name="pin_change">變更 PIN 碼</string>
+	<string name="pin_confirm">確認 PIN 碼</string>
+	<string name="pin_format">請輸入 4 至 8 位數字。</string>
+	<string name="pin_mismatch">兩次輸入的 PIN 碼不相符。</string>
+	<string name="pin_invalid">PIN 碼不正確。</string>
+	<string name="pin_retry">嘗試次數過多。請等候 30 秒。</string>
+	<string name="pin_summary">設定 PIN 碼以保護偏好設定及捷徑建立功能。</string>
+	<string name="hidden_apps">隱藏應用程式</string>
+	<string name="hidden_summary">在主畫面及清單中隱藏應用程式及其捷徑，並保留原有的方格配置。</string>
+	<string name="locked_apps">受保護的應用程式及資料夾</string>
+	<string name="locked_summary">開啟所選項目前必須輸入 PIN 碼。</string>
+	<string name="protection_disable">停用保護</string>
+	<string name="protection_disable_summary">重新顯示隱藏的應用程式，並停止要求 PIN 碼。保留選取項目以供日後使用。</string>
+	<string name="protection_limits">僅保護此啟動器</string>
+	<string name="protection_recovery">此功能不會鎖定 Android 或其他啟動器。若忘記 PIN 碼，必須在 Android 設定中清除此啟動器的資料，這也會重設主畫面配置。</string>
+	<string name="protection_error">無法儲存保護設定。</string>
+	<string name="protection_category">安全性</string>
+	<string name="title_show_wallpaper">在主畫面顯示桌布</string>
+	<string name="summary_show_wallpaper">關閉後主畫面背景將變為黑色，不會變更 Android 桌布。</string>
+	<string name="reset_wallpaper">還原預設桌布</string>
+	<string name="summary_reset_wallpaper">還原所有啟動器共用的 Android 主畫面桌布。</string>
+	<string name="confirm_reset_wallpaper">要還原預設 Android 主畫面桌布嗎？這會變更所有啟動器的桌布。</string>
+	<string name="resetting_wallpaper">正在還原桌布…</string>
+	<string name="wallpaper_restored">已還原預設桌布。</string>
+	<string name="wallpaper_error">無法在此裝置上還原桌布。</string>
+	<string name="wallpaper_unavailable">此裝置無法開啟桌布選擇功能。</string>
+	<string name="title_show_ip">顯示 IP 位址</string>
+	<string name="summary_show_ip">依網路介面顯示本機位址。選取位址區域可查看詳細資訊。</string>
+	<string name="ip_addresses">IP 位址</string>
+	<string name="network_disconnected">未連線至網路</string>
+	<string name="ip_unavailable">沒有可用的 IP 位址</string>
+	<string name="network_unavailable">無法取得網路資訊</string>
+	<string name="choose_home_image">選擇主畫面圖片</string>
+	<string name="summary_choose_home_image">選擇僅供 LauncherTV 使用的圖片（最大 32 MB），並啟用主畫面圖片。</string>
+	<string name="use_home_image">使用主畫面圖片</string>
+	<string name="summary_home_image">停用後會重新顯示 Android 桌布。Android 桌布不會變更。</string>
+	<string name="image_scale">主畫面圖片縮放方式</string>
+	<string name="image_fit">完整圖片（必要時加上黑邊）</string>
+	<string name="image_crop">填滿螢幕（必要時裁切邊緣）</string>
+	<string name="image_imported">已儲存主畫面圖片</string>
+	<string name="image_error">無法儲存此圖片。請選擇有效且不超過 32 MB 的圖片。</string>
+	<string name="image_picker_unavailable">沒有可用的圖片選擇工具</string>
+	<string name="title_show_network">顯示網路圖示</string>
+	<string name="summary_show_network">在時鐘旁顯示連線類型，不會檢查網際網路存取狀態。</string>
+	<string name="network_wifi">已連線至 Wi-Fi</string>
+	<string name="network_ethernet">已連線至乙太網路</string>
+	<string name="network_other">已連線至其他網路</string>
+	<string name="title_home">預設主畫面應用程式</string>
+	<string name="summary_home">在 Android 設定中將 LauncherTV 設為預設主畫面。</string>
+	<string name="home_settings_unavailable">無法選擇主畫面，已開啟 Android 設定。</string>
+</resources>
