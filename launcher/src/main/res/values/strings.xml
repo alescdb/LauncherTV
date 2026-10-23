@@ -16,6 +16,8 @@
   -->
 
 <resources>
+	<string name="applications">Applications</string>
+	<string name="preferences">Preferences</string>
 	<string name="title_screen_always_on">Screen always on</string>
 	<string name="summary_screen_always_on">Keep screen on</string>
 	<string name="app_grid">Grid size</string>

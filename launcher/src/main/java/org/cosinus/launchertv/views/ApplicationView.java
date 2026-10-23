@@ -120,15 +120,15 @@ public class ApplicationView extends LinearLayout {
 
 		Drawable drawableEnabled = createTileShape(
 				R.drawable.application_normal,
-				Color.argb(getTransparency(transparency, 0.0F), 0xF0, 0xF0, 0xF0)
+				Color.argb(getTransparency(transparency, 0.0F), 0x21, 0x2A, 0x36)
 		);
 		Drawable drawableFocused = createTileShape(
 				R.drawable.application_focused,
-				Color.argb(getTransparency(transparency, 0.4F), 0xE0, 0xE0, 0xFF)
+				Color.argb(getTransparency(transparency, 0.4F), 0x3A, 0x46, 0x57)
 		);
 		Drawable drawablePressed = createTileShape(
 				R.drawable.application_pressed,
-				Color.argb(getTransparency(transparency, 0.8F), 0xE0, 0xE0, 0xFF)
+				Color.argb(getTransparency(transparency, 0.8F), 0x4A, 0x58, 0x6B)
 		);
 
 		stateListDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);

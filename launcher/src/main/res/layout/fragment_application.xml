@@ -16,12 +16,11 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
 			  android:focusable="false"
 			  android:orientation="vertical"
-			  android:paddingBottom="@dimen/activity_vertical_margin"
+			  android:paddingBottom="@dimen/activity_horizontal_margin"
 			  android:paddingLeft="@dimen/activity_horizontal_margin"
 			  android:paddingRight="@dimen/activity_horizontal_margin"
 			  android:paddingTop="@dimen/activity_vertical_margin">
@@ -33,11 +32,12 @@
 
 		<ImageButton
 			android:id="@+id/application_grid"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_gravity="top"
-			android:src="@drawable/ic_apps"
-			tools:ignore="ContentDescription"/>
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:background="@drawable/application_selector"
+			android:padding="12dp"
+			android:contentDescription="@string/applications"
+			android:src="@drawable/ic_apps"/>
 
 		<LinearLayout
 			android:id="@+id/battery_layout"
@@ -62,13 +62,9 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:maxLines="1"
-					android:shadowColor="#ff000000"
-					android:shadowDx="1"
-					android:shadowDy="1"
-					android:shadowRadius="0.5"
 					android:text="@string/test_battery"
 					android:textColor="#ffffffff"
-					android:textSize="25sp"/>
+					android:textSize="28sp"/>
 
 				<ImageView
 					android:id="@+id/battery_icon"
@@ -111,13 +107,9 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
 				android:maxLines="1"
-				android:shadowColor="#ff000000"
-				android:shadowDx="1"
-				android:shadowDy="1"
-				android:shadowRadius="0.5"
 				android:text="@string/test_clock"
 				android:textColor="#ffffffff"
-				android:textSize="25sp"/>
+				android:textSize="28sp"/>
 
 			<TextView
 				android:id="@+id/date"
@@ -125,15 +117,20 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="end"
 				android:maxLines="1"
-				android:shadowColor="#ff000000"
-				android:shadowDx="1"
-				android:shadowDy="1"
-				android:shadowRadius="0.5"
 				android:text="@string/test_date"
 				android:textAppearance="?android:attr/textAppearanceSmall"
 				android:textColor="#ffffffff"
 				android:textSize="15sp"/>
 		</LinearLayout>
+		<ImageButton
+			android:id="@+id/settings"
+			android:layout_width="48dp"
+			android:layout_height="48dp"
+			android:layout_marginLeft="12dp"
+			android:background="@drawable/application_selector"
+			android:padding="12dp"
+			android:contentDescription="@string/preferences"
+			android:src="@drawable/ic_tune"/>
 	</LinearLayout>
 
 
@@ -142,6 +139,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
 		android:layout_weight="1"
+		android:layout_marginTop="@dimen/activity_vertical_margin"
 		android:focusable="false"
 		android:gravity="center_vertical"
 		android:orientation="vertical">
@@ -159,24 +157,15 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:layout_marginRight="10dp"
+			android:layout_marginTop="@dimen/activity_vertical_margin"
 			android:background="?android:attr/selectableItemBackground"
 			android:contentDescription="@string/ip_addresses"
 			android:ellipsize="end"
 			android:focusable="true"
 			android:maxLines="2"
-			android:shadowColor="#ff000000"
-			android:shadowDx="1"
-			android:shadowDy="1"
-			android:shadowRadius="0.5"
 			android:textColor="#ffffffff"
 			android:textSize="15sp"
 			android:visibility="gone"/>
 
-		<ImageButton
-			android:id="@+id/settings"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/ic_tune"
-			tools:ignore="ContentDescription"/>
 	</LinearLayout>
 </LinearLayout>

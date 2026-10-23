@@ -16,6 +16,8 @@
   -->
 
 <resources>
+	<string name="applications">應用程式</string>
+	<string name="preferences">偏好設定</string>
 	<string name="title_screen_always_on">螢幕保持開啟</string>
 	<string name="summary_screen_always_on">防止螢幕自動關閉</string>
 	<string name="app_grid">格線大小</string>
