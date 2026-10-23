@@ -25,7 +25,7 @@ checkstyle {
 
 check.dependsOn 'checkstyle'
 
-task checkstyle(type: Checkstyle) {
+tasks.register('checkstyle', Checkstyle) {
     configFile file("${project.rootDir}/style/checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = file("${project.rootDir}/style/suppressions.xml").absolutePath
 
@@ -40,20 +40,26 @@ task checkstyle(type: Checkstyle) {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    namespace 'org.cosinus.launchertv'
+    compileSdk 37
+    buildToolsVersion '37.0.0'
 
-    lintOptions {
+    lint {
         abortOnError true
         lintConfig file('lint.xml')
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {
         applicationId "org.cosinus.launchertv"
         minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 159
-        versionName "1.5.9"
+        targetSdkVersion 37
+        versionCode 200
+        versionName "2.0.0"
     }
 
     signingConfigs {
@@ -71,10 +77,8 @@ android {
         release {
             debuggable false
             jniDebuggable false
-            renderscriptDebuggable false
             minifyEnabled true
-            proguardFile 'proguard-rules.pro'
-            zipAlignEnabled true
+            proguardFiles 'proguard-rules.pro'
             if (project.hasProperty('keystorePassword')) {
                 //noinspection GroovyAssignabilityCheck
                 signingConfig signingConfigs.release
@@ -82,7 +86,7 @@ android {
         }
         debug {
             applicationIdSuffix ".debug"
-            testCoverageEnabled true
+            enableAndroidTestCoverage true
         }
     }
 }
@@ -92,10 +96,10 @@ dependencies {
 }
 
 coveralls {
-    jacocoReportPath = "${buildDir}/reports/coverage/debug/report.xml"
+    jacocoReportPath = layout.buildDirectory.file('reports/coverage/androidTest/debug/connected/report.xml').get().asFile.path
 }
 
-tasks.coveralls {
+tasks.named('coveralls') {
     dependsOn 'connectedAndroidTest'
     onlyIf { System.env.'CI' }
 }

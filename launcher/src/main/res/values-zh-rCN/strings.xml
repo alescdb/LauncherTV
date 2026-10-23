@@ -38,7 +38,7 @@
 	<string name="summary_screen_always_on">保持屏幕常亮</string>
 	<string name="title_screen_always_on">屏幕常亮</string>
 	<string name="title_locked">锁定图标</string>
-	<string name="summary_locked">防止图标被意外移除</string>
+	<string name="summary_locked">防止更改图标和网格</string>
 	<string name="home_locked">图标已通过设置设为锁定</string>
 	<string name="title_margin_x">图标横向边距</string>
 	<string name="title_margin_y">图标 Y 边距</string>

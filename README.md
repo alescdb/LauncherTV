@@ -1,25 +1,17 @@
-Status
-----------------
+# Simple TV Launcher
 
-  [![Build Status](https://travis-ci.org/alescdb/LauncherTV.svg?branch=master)](https://travis-ci.org/alescdb/LauncherTV)
-  [![Coverage Status](https://coveralls.io/repos/github/alescdb/LauncherTV/badge.svg)](https://coveralls.io/github/alescdb/LauncherTV) 
+A lightweight Android TV launcher designed for remote controls, including older
+TV boxes running Android 4.0 or later.
 
-Google Play
-----------------
+![Simple TV Launcher home screen](docs/images/home.png)
 
-[![Get it on Google Play][2]][1]
+## Features
 
-  [1]: https://play.google.com/store/apps/details?id=org.cosinus.launchertv
-  [2]: https://developer.android.com/images/brand/en_generic_rgb_wo_60.png
+- [Customizable home grid](docs/home.md): tile size, labels, transparency and icon locking.
+- [Applications, shortcuts and folders](docs/home.md#applications-shortcuts-and-folders), including a tile for the TV's original launcher.
+- [PIN protection and hidden applications](docs/protection.md).
+- [System wallpaper or a custom home image](docs/wallpaper.md), with fit and crop modes.
+- [Clock with optional date, battery and network information](docs/home.md#status-information).
 
-
-Compiling
-----------------
-
-To compile Simple TV Launcher using gradlew, you must first specify where
-your Android SDK is via the local.properties file. Insert a line
-similar to the following with the full path to your SDK:
-
-```
-sdk.dir=/opt/android-sdk
-```
+[Google Play](https://play.google.com/store/apps/details?id=org.cosinus.launchertv)
+| [Build from source](docs/building.md)

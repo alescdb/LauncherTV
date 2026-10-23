@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:key="pin" android:title="@string/pin_enable" android:summary="@string/pin_summary"/>
+	<Preference android:key="hidden" android:title="@string/hidden_apps" android:summary="@string/hidden_summary"/>
+	<Preference android:key="locked" android:title="@string/locked_apps" android:summary="@string/locked_summary"/>
+	<Preference android:key="disable" android:title="@string/protection_disable" android:summary="@string/protection_disable_summary"/>
+	<Preference android:selectable="false" android:title="@string/protection_limits" android:summary="@string/protection_recovery"/>
+</PreferenceScreen>

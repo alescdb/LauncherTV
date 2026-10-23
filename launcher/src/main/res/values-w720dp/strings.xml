@@ -17,5 +17,5 @@
   -->
 
 <resources>
-	<string name="summary_locked">Lock icons</string>
+	<string name="summary_locked">Prevent changes to icons and grid</string>
 </resources>

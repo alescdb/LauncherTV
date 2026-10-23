@@ -46,6 +46,7 @@
 		android:focusable="false"
 		android:gravity="center_horizontal"
 		android:maxLines="1"
+			android:ellipsize="end"
 		android:shadowColor="#ff000000"
 		android:shadowDx="1"
 		android:shadowDy="1"

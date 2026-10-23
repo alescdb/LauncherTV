@@ -28,9 +28,11 @@ public class AppInfo {
 	private final Drawable mIcon;
 	private String mName;
 	private final String mPackageName;
+	private final String mId;
 
 	AppInfo(PackageManager packageManager, ResolveInfo resolveInfo) {
 		mPackageName = resolveInfo.activityInfo.packageName;
+		mId = mPackageName;
 		mIcon = resolveInfo.loadIcon(packageManager);
 		try {
 			mName = resolveInfo.loadLabel(packageManager).toString();
@@ -41,12 +43,24 @@ public class AppInfo {
 
 	public AppInfo(PackageManager packageManager, ApplicationInfo applicationInfo) {
 		mPackageName = applicationInfo.packageName;
+		mId = mPackageName;
 		mIcon = applicationInfo.loadIcon(packageManager);
 		try {
 			mName = applicationInfo.loadLabel(packageManager).toString();
 		} catch (Exception e) {
 			mName = mPackageName;
 		}
+	}
+
+	public AppInfo(String id, String name, Drawable icon) {
+		mId = id;
+		mName = name;
+		mIcon = icon;
+		mPackageName = null;
+	}
+
+	public String getId() {
+		return (mId);
 	}
 
 

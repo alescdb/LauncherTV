@@ -16,6 +16,7 @@
   -->
 
 <resources>
+	<bool name="show_date_default">false</bool>
 	<string name="app_name" translatable="false">Simple TV Launcher</string>
 	<string name="test_clock" translatable="false">00:00</string>
 	<string name="test_battery" translatable="false">42%</string>
@@ -52,18 +53,26 @@
 		<item>20%</item>
 		<item>25%</item>
 		<item>30%</item>
-		<item>45%</item>
+		<item>35%</item>
 		<item>40%</item>
-		<item>55%</item>
+		<item>45%</item>
 		<item>50%</item>
-		<item>65%</item>
+		<item>55%</item>
 		<item>60%</item>
-		<item>75%</item>
+		<item>65%</item>
 		<item>70%</item>
-		<item>85%</item>
+		<item>75%</item>
 		<item>80%</item>
-		<item>95%</item>
+		<item>85%</item>
 		<item>90%</item>
+		<item>95%</item>
 		<item>100%</item>
+	</string-array>
+	<string-array name="default_applications" translatable="false"/>
+	<bool name="show_wallpaper_default">true</bool>
+	<bool name="show_ip_default">false</bool>
+	<string-array name="image_scale_values" translatable="false">
+		<item>fit</item>
+		<item>crop</item>
 	</string-array>
 </resources>

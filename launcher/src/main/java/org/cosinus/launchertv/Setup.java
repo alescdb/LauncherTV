@@ -20,6 +20,11 @@ package org.cosinus.launchertv;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
+
+import java.io.File;
+
+import org.cosinus.launchertv.views.ApplicationView;
 
 import org.cosinus.launchertv.activities.Preferences;
 
@@ -28,6 +33,8 @@ import static org.cosinus.launchertv.activities.Preferences.PREFERENCE_TRANSPARE
 
 
 public class Setup {
+	public static final String APPLICATIONS_NAME = "applications";
+	private static final String DEFAULTS_INITIALIZED = "defaults_initialized";
 	private static final int DEFAULT_GRID_X = 3;
 	private static final int DEFAULT_GRID_Y = 2;
 	private static final int DEFAULT_MARGIN_X = 5;
@@ -38,6 +45,26 @@ public class Setup {
 
 	public Setup(Context context) {
 		mContext = context;
+	}
+
+	public void initializeApplications() {
+		// Un ancien accueil vidé volontairement possède encore son fichier de préférences.
+		File file = new File(mContext.getApplicationInfo().dataDir, "shared_prefs/" + APPLICATIONS_NAME + ".xml");
+		boolean configured = file.exists();
+		SharedPreferences preferences = mContext.getSharedPreferences(APPLICATIONS_NAME, Context.MODE_PRIVATE);
+		if (preferences.getBoolean(DEFAULTS_INITIALIZED, false))
+			return;
+		SharedPreferences.Editor editor = preferences.edit();
+		if (!configured && preferences.getAll().isEmpty() && getPreferences().getAll().isEmpty()) {
+			String[] applications = mContext.getResources().getStringArray(R.array.default_applications);
+			int count = Math.min(applications.length, Math.max(2, getGridX()) * Math.max(1, getGridY()));
+			for (int position = 0; position < count; position++) {
+				String packageName = applications[position].trim();
+				if (!TextUtils.isEmpty(packageName))
+					editor.putString(ApplicationView.getPreferenceKey(position), packageName);
+			}
+		}
+		editor.putBoolean(DEFAULTS_INITIALIZED, true).commit();
 	}
 
 	private SharedPreferences getPreferences() {
@@ -69,12 +96,60 @@ public class Setup {
 	}
 
 	public float getTransparency() {
+		float defaultValue = Float.parseFloat(mContext.getString(R.string.transparency_default));
 		try {
-			return (getPreferences().getFloat(PREFERENCE_TRANSPARENCY, 0.5F));
+			return (getPreferences().getFloat(PREFERENCE_TRANSPARENCY, defaultValue));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (0.5F);
+		return (defaultValue);
+	}
+
+	public boolean showNetwork() {
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_NETWORK, false));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (false);
+	}
+
+	public boolean showIp() {
+		boolean defaultValue = mContext.getResources().getBoolean(R.bool.show_ip_default);
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_IP, defaultValue));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (defaultValue);
+	}
+
+	public boolean useHomeImage() {
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_HOME_IMAGE, false));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (false);
+	}
+
+	public boolean fitHomeImage() {
+		try {
+			return (!"crop".equals(getPreferences().getString(Preferences.PREFERENCE_IMAGE_SCALE, "fit")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (true);
+	}
+
+	public boolean showWallpaper() {
+		boolean defaultValue = mContext.getResources().getBoolean(R.bool.show_wallpaper_default);
+		try {
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_WALLPAPER, defaultValue));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return (defaultValue);
 	}
 
 	public boolean keepScreenOn() {
@@ -96,12 +171,13 @@ public class Setup {
 	}
 
 	public boolean showDate() {
+		boolean defaultValue = mContext.getResources().getBoolean(R.bool.show_date_default);
 		try {
-			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_DATE, true));
+			return (getPreferences().getBoolean(Preferences.PREFERENCE_SHOW_DATE, defaultValue));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (true);
+		return (defaultValue);
 	}
 
 	public boolean showBattery() {
