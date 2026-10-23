@@ -1,7 +1,13 @@
+[![APK release](https://github.com/alescdb/LauncherTV/actions/workflows/release.yml/badge.svg)](https://github.com/alescdb/LauncherTV/actions/workflows/release.yml)
+
 # Simple TV Launcher
 
 A lightweight Android TV launcher designed for remote controls, including older
 TV boxes running Android 4.0 or later.
+
+<a href="https://play.google.com/store/apps/details?id=org.cosinus.launchertv">
+  <img src="docs/images/google-play-badge.png" alt="Get it on Google Play" width="200">
+</a>
 
 ![Simple TV Launcher home screen](docs/images/home.png)
 
@@ -13,5 +19,4 @@ TV boxes running Android 4.0 or later.
 - [System wallpaper or a custom home image](docs/wallpaper.md), with fit and crop modes.
 - [Clock with optional date, battery and network information](docs/home.md#status-information).
 
-[Google Play](https://play.google.com/store/apps/details?id=org.cosinus.launchertv)
-| [Build from source](docs/building.md)
+[Build from source](docs/building.md)
