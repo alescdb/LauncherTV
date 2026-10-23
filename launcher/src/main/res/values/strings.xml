@@ -127,4 +127,5 @@
 	<string name="title_home">Default home app</string>
 	<string name="summary_home">Choose LauncherTV as the default home screen in Android settings.</string>
 	<string name="home_settings_unavailable">Home selection is unavailable. Opened Android settings.</string>
+	<string name="title_privacy">Privacy policy</string>
 </resources>

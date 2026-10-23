@@ -66,6 +66,7 @@ public class Preferences extends PreferenceActivity {
 	public static final String PREFERENCE_MARGIN_Y = "preference_margin_y";
 	public static final String PREFERENCE_LOCKED = "preference_locked";
 	private static final String PREFERENCE_GITHUB = "preference_github";
+	private static final String PREFERENCE_PRIVACY = "preference_privacy";
 	private static final String PREFERENCE_ABOUT = "preference_about";
 	private static final String PREFERENCE_SCREENSAVER = "preference_screensaver";
 	private static final int REQUEST_UNLOCK = 100;
@@ -184,6 +185,14 @@ public class Preferences extends PreferenceActivity {
 			}
 		});
 
+		findPreference(PREFERENCE_PRIVACY).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				openPrivacy();
+				return (true);
+			}
+		});
+
 		PackageInfo pInfo;
 		String version = "#Err";
 		try {
@@ -208,6 +217,16 @@ public class Preferences extends PreferenceActivity {
 				return (true);
 			}
 		});
+	}
+
+	private void openPrivacy() {
+		try {
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.privacy_url))));
+		} catch (Exception e) {
+			e.printStackTrace();
+			Toast.makeText(this, String.format(getString(R.string.error_opening_link),
+					getString(R.string.title_privacy), e.getMessage()), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override

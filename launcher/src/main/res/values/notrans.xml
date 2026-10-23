@@ -75,4 +75,5 @@
 		<item>fit</item>
 		<item>crop</item>
 	</string-array>
+	<string name="privacy_url" translatable="false">https://alescdb.github.io/LauncherTV/privacy.html</string>
 </resources>

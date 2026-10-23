@@ -126,4 +126,5 @@
 	<string name="title_home">Accueil par défaut</string>
 	<string name="summary_home">Choisir LauncherTV comme accueil par défaut dans les réglages Android.</string>
 	<string name="home_settings_unavailable">Le choix de l’accueil est indisponible. Les réglages Android ont été ouverts.</string>
+	<string name="title_privacy">Politique de confidentialité</string>
 </resources>

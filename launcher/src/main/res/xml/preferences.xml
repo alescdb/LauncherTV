@@ -151,5 +151,9 @@
 			android:key="preference_github"
 			android:title="@string/title_github">
 		</Preference>
+		<Preference
+			android:key="preference_privacy"
+			android:title="@string/title_privacy"
+			android:summary="@string/privacy_url"/>
 	</PreferenceCategory>
 </PreferenceScreen>
