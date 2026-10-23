@@ -16,6 +16,8 @@
   -->
 
 <resources>
+	<string name="applications">Applications</string>
+	<string name="preferences">Préférences</string>
 	<string name="title_screensaver">Écran de veille</string>
 	<string name="summary_screensaver">Configurer l’écran de veille</string>
 	<string name="screensaver_unavailable">Les réglages de l’écran de veille sont indisponibles sur cet appareil</string>

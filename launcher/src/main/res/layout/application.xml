@@ -46,11 +46,8 @@
 		android:focusable="false"
 		android:gravity="center_horizontal"
 		android:maxLines="1"
-			android:ellipsize="end"
-		android:shadowColor="#ff000000"
-		android:shadowDx="1"
-		android:shadowDy="1"
-		android:shadowRadius="0.5"
+		android:ellipsize="end"
 		android:text=""
+		android:textColor="#FFFFFFFF"
 		android:textAppearance="?android:attr/textAppearanceSmall"/>
 </LinearLayout>

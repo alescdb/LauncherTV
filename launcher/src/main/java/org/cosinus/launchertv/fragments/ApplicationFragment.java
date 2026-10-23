@@ -217,7 +217,7 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		for (int y = 0; y < mGridY; y++) {
 			LinearLayout ll = new LinearLayout(getContext());
 			ll.setOrientation(LinearLayout.HORIZONTAL);
-			ll.setGravity(Gravity.CENTER_VERTICAL);
+			ll.setGravity(Gravity.TOP);
 			ll.setFocusable(false);
 			ll.setLayoutParams(new LinearLayout.LayoutParams(
 					LinearLayout.LayoutParams.MATCH_PARENT, 0, 1
@@ -241,7 +241,8 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 					av.setId(View.generateViewId());
 				}
 				LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1);
-				lp.setMargins(marginX, marginY, marginX, marginY);
+				lp.setMargins(x == 0 ? 0 : marginX, y == 0 ? 0 : marginY,
+						x + 1 == mGridX ? 0 : marginX, y + 1 == mGridY ? 0 : marginY);
 				av.setLayoutParams(lp);
 				ll.addView(av);
 				mApplications[y][x] = av;
@@ -256,8 +257,8 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 	private void setApplicationOrder() {
 		for (int y = 0; y < mGridY; y++) {
 			for (int x = 0; x < mGridX; x++) {
-				int upId = R.id.application_grid;
-				int downId = mSetup.showIp() && x + 1 < mGridX ? R.id.ip_address : R.id.settings;
+				int upId = x + 1 == mGridX ? R.id.settings : R.id.application_grid;
+				int downId = mSetup.showIp() ? R.id.ip_address : upId;
 				int leftId = R.id.application_grid;
 				int rightId = R.id.settings;
 
@@ -285,18 +286,18 @@ public class ApplicationFragment extends Fragment implements View.OnClickListene
 		}
 
 		mGridView.setNextFocusLeftId(R.id.settings);
-		mGridView.setNextFocusRightId(mApplications[0][0].getId());
-		mGridView.setNextFocusUpId(R.id.settings);
+		mGridView.setNextFocusRightId(R.id.settings);
+		mGridView.setNextFocusUpId(R.id.application_grid);
 		mGridView.setNextFocusDownId(mApplications[0][0].getId());
 
 		mIp.setNextFocusLeftId(mApplications[mGridY - 1][mGridX - 1].getId());
 		mIp.setNextFocusRightId(R.id.settings);
 		mIp.setNextFocusUpId(mApplications[mGridY - 1][0].getId());
 		mIp.setNextFocusDownId(R.id.application_grid);
-		mSettings.setNextFocusLeftId(mSetup.showIp() ? R.id.ip_address : mApplications[mGridY - 1][mGridX - 1].getId());
+		mSettings.setNextFocusLeftId(R.id.application_grid);
 		mSettings.setNextFocusRightId(R.id.application_grid);
-		mSettings.setNextFocusUpId(mApplications[mGridY - 1][mGridX - 1].getId());
-		mSettings.setNextFocusDownId(R.id.application_grid);
+		mSettings.setNextFocusUpId(R.id.settings);
+		mSettings.setNextFocusDownId(mApplications[0][mGridX - 1].getId());
 	}
 
 
