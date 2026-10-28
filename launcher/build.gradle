@@ -77,8 +77,7 @@ android {
         release {
             debuggable false
             jniDebuggable false
-            minifyEnabled true
-            proguardFiles 'proguard-rules.pro'
+            minifyEnabled false
             if (project.hasProperty('keystorePassword')) {
                 //noinspection GroovyAssignabilityCheck
                 signingConfig signingConfigs.release
