@@ -27,8 +27,8 @@
 	<string name="title_grid_y">Řádky</string>
 	<string name="summary_grid_y">Počet řádků: %s</string>
 	<string name="system">Systém</string>
-	<string name="title_background">Pozadí</string>
-	<string name="summary_background">Nastavit obrázek pozadí</string>
+	<string name="title_background">Tapeta</string>
+	<string name="summary_background">Vybrat vestavěnou tapetu nebo obrázek ze zařízení či USB disku</string>
 	<string name="title_system">Systémová nastavení</string>
 	<string name="summary_system">Otevřít systémová nastavení</string>
 	<string name="summary_show_date">Zobrazovat datum pod polem s časem</string>

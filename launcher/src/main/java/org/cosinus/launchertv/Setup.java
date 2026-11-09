@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.widget.ImageView;
 
 import java.io.File;
 
@@ -133,13 +134,14 @@ public class Setup {
 		return (false);
 	}
 
-	public boolean fitHomeImage() {
+	public ImageView.ScaleType getImageScaleType() {
+		String value = "fit";
 		try {
-			return (!"crop".equals(getPreferences().getString(Preferences.PREFERENCE_IMAGE_SCALE, "fit")));
+			value = getPreferences().getString(Preferences.PREFERENCE_IMAGE_SCALE, value);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return (true);
+		return ("crop".equals(value) ? ImageView.ScaleType.CENTER_CROP : ImageView.ScaleType.FIT_CENTER);
 	}
 
 	public boolean showWallpaper() {

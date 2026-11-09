@@ -31,6 +31,7 @@ import android.widget.EditText;
 
 import org.cosinus.launchertv.AppInfo;
 import org.cosinus.launchertv.Folders;
+import org.cosinus.launchertv.HomeBackground;
 import org.cosinus.launchertv.R;
 import org.cosinus.launchertv.Utils;
 import org.cosinus.launchertv.views.ApplicationAdapter;
@@ -41,6 +42,7 @@ import java.lang.ref.WeakReference;
 
 
 public class ApplicationList extends Activity implements AdapterView.OnItemClickListener, View.OnClickListener {
+	private HomeBackground mBackground;
 	public static final String CREATE_FOLDER = "create_folder";
 	public static final String EXCLUDE_FOLDERS = "exclude_folders";
 	public static final String APP_ID = "app_id";
@@ -119,6 +121,7 @@ public class ApplicationList extends Activity implements AdapterView.OnItemClick
 				R.layout.listview :
 				R.layout.gridview);
 
+		mBackground = HomeBackground.attach(this);
 		mListView = (AbsListView) findViewById(R.id.list);
 		mApplicationLoader = new LoadTask(this, intent.getBooleanExtra(EXCLUDE_FOLDERS, false), intent.getBooleanExtra(CREATE_FOLDER, false));
 		mApplicationLoader.execute();
@@ -137,7 +140,14 @@ public class ApplicationList extends Activity implements AdapterView.OnItemClick
 	}
 
 	@Override
+	protected void onResume() {
+		super.onResume();
+		mBackground.update();
+	}
+
+	@Override
 	protected void onDestroy() {
+		mBackground.clear();
 		if (mApplicationLoader != null) {
 			mApplicationLoader.cancel(true);
 			mApplicationLoader = null;

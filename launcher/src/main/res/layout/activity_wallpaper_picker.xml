@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Simple TV Launcher
+  ~ Copyright 2017 Alexandre Del Bigio
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@android:color/black">
+
+	<ImageView
+		android:id="@+id/wallpaper_preview"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:contentDescription="@null"
+		android:focusable="false"
+		android:scaleType="centerCrop"/>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<View
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1"/>
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="1.2"
+			tools:ignore="NestedWeights"
+			android:background="@drawable/wallpaper_panel"
+			android:orientation="vertical"
+			android:paddingLeft="48dp"
+			android:paddingRight="48dp"
+			android:paddingTop="16dp">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/wallpaper_picker_title"
+				android:textColor="#FFFFFFFF"
+				android:textSize="22sp"/>
+
+			<TextView
+				android:id="@+id/wallpaper_hint"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="8dp"
+				android:layout_marginTop="4dp"
+				android:textColor="#B3FFFFFF"
+				android:textSize="14sp"/>
+
+			<GridView
+				android:id="@+id/wallpaper_grid"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:clipToPadding="false"
+				android:columnWidth="192dp"
+				android:drawSelectorOnTop="true"
+				android:horizontalSpacing="12dp"
+				android:listSelector="@drawable/wallpaper_selector"
+				android:numColumns="auto_fit"
+				android:paddingBottom="24dp"
+				android:stretchMode="columnWidth"
+				android:verticalSpacing="12dp"/>
+		</LinearLayout>
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/wallpaper_progress"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:background="#B3000000"
+		android:clickable="true"
+		android:focusable="false"
+		android:gravity="center"
+		android:text="@string/wallpaper_applying"
+		android:textColor="#FFFFFFFF"
+		android:textSize="20sp"
+		android:visibility="gone"
+		tools:ignore="KeyboardInaccessibleWidget"/>
+</FrameLayout>

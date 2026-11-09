@@ -28,7 +28,7 @@
 	<string name="no_empty_tile">Aucune case vide. Supprimez une icône ou agrandissez la grille.</string>
 	<string name="about">A propos</string>
 	<string name="app_grid">Taille de la grille</string>
-	<string name="summary_background">Fond d\'écran</string>
+	<string name="summary_background">Choisir le fond intégré ou une image de l’appareil ou d’une clé USB</string>
 	<string name="summary_grid_x">Nombre de colonnes : %s</string>
 	<string name="summary_grid_y">Nombre de ligne : %s</string>
 	<string name="summary_margin_x">Largeur d\'espacement entre les icones : %s dp</string>
@@ -92,8 +92,8 @@
 	<string name="title_show_wallpaper">Afficher le fond d’écran sur l’accueil</string>
 	<string name="summary_show_wallpaper">Désactiver pour un accueil noir, sans modifier le fond d’écran Android.</string>
 	<string name="reset_wallpaper">Rétablir le fond d’écran par défaut</string>
-	<string name="summary_reset_wallpaper">Rétablir le fond d’écran d’accueil Android pour tous les launchers.</string>
-	<string name="confirm_reset_wallpaper">Rétablir le fond d’écran d’accueil Android par défaut ? Ce changement concerne tous les launchers.</string>
+	<string name="summary_reset_wallpaper">Rétablir le fond par défaut. Sans fond Android (la plupart des téléviseurs), le fond intégré est utilisé ; sinon le fond d’accueil Android est rétabli pour tous les launchers.</string>
+	<string name="confirm_reset_wallpaper">Rétablir le fond par défaut ? Sans fond Android (la plupart des téléviseurs), le fond intégré est utilisé ; sinon le fond d’accueil Android est rétabli, pour tous les launchers.</string>
 	<string name="resetting_wallpaper">Rétablissement du fond d’écran…</string>
 	<string name="wallpaper_restored">Fond d’écran par défaut rétabli.</string>
 	<string name="wallpaper_error">Impossible de rétablir le fond d’écran sur cet appareil.</string>
@@ -104,16 +104,11 @@
 	<string name="network_disconnected">Aucune connexion réseau</string>
 	<string name="ip_unavailable">Aucune adresse IP disponible</string>
 	<string name="network_unavailable">Informations réseau indisponibles</string>
-	<string name="choose_home_image">Choisir une image d’accueil</string>
-	<string name="summary_choose_home_image">Choisir une image pour LauncherTV uniquement (32 Mo maximum). Active l’image d’accueil.</string>
-	<string name="use_home_image">Utiliser l’image d’accueil</string>
-	<string name="summary_home_image">Désactiver pour retrouver le fond Android. Le fond Android reste inchangé.</string>
-	<string name="image_scale">Cadrage de l’image d’accueil</string>
+	<string name="image_scale">Cadrage du fond d’écran</string>
 	<string name="image_fit">Image entière (bandes noires si nécessaire)</string>
 	<string name="image_crop">Remplir l’écran (bords coupés si nécessaire)</string>
-	<string name="image_imported">Image d’accueil enregistrée</string>
+	<string name="image_imported">Fond d’écran appliqué</string>
 	<string name="image_error">Impossible d’enregistrer cette image. Choisissez une image valide de 32 Mo maximum.</string>
-	<string name="image_picker_unavailable">Aucun sélecteur d’image disponible</string>
 	<string-array name="image_scale_labels">
 		<item>@string/image_fit</item>
 		<item>@string/image_crop</item>
@@ -127,4 +122,19 @@
 	<string name="summary_home">Choisir LauncherTV comme accueil par défaut dans les réglages Android.</string>
 	<string name="home_settings_unavailable">Le choix de l’accueil est indisponible. Les réglages Android ont été ouverts.</string>
 	<string name="title_privacy">Politique de confidentialité</string>
+	<string name="wallpaper_picker_title">Choisir un fond d’écran</string>
+	<string name="wallpaper_hint">Fond intégré. Autorisez l’accès aux photos pour afficher aussi les images de l’appareil et des clés USB.</string>
+	<string name="wallpaper_builtin">Intégré</string>
+	<string name="wallpaper_local_permission">Afficher les images locales et USB</string>
+	<string name="wallpaper_permission_denied">Accès aux photos refusé. Autorisez-le dans les paramètres Android pour afficher les images locales et USB.</string>
+	<string name="wallpaper_browse">Autres applications…</string>
+	<string name="wallpaper_system">Fond d’écran Android</string>
+	<string name="wallpaper_loading">Recherche d’images sur l’appareil et les clés USB…</string>
+	<string name="wallpaper_none">Aucune image trouvée sur l’appareil ni sur les clés USB.</string>
+	<string name="wallpaper_applying">Application du fond d’écran…</string>
+	<plurals name="wallpaper_count">
+		<item quantity="one">%1$d image trouvée sur l’appareil et les clés USB</item>
+		<item quantity="many">%1$d images trouvées sur l’appareil et les clés USB</item>
+		<item quantity="other">%1$d images trouvées sur l’appareil et les clés USB</item>
+	</plurals>
 </resources>

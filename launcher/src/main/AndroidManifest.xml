@@ -44,6 +44,11 @@
 	<uses-permission
 		android:name="android.permission.SET_WALLPAPER"/>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<!-- Images locales et clés USB pour le sélecteur de fond d'écran intégré -->
+	<uses-permission
+		android:name="android.permission.READ_EXTERNAL_STORAGE"
+		android:maxSdkVersion="32"/>
+	<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
 
 	<queries>
 		<intent>
@@ -57,6 +62,13 @@
 		<intent>
 			<action android:name="android.intent.action.MAIN"/>
 			<category android:name="android.intent.category.HOME"/>
+		</intent>
+		<intent>
+			<action android:name="android.intent.action.GET_CONTENT"/>
+			<data android:mimeType="image/*"/>
+		</intent>
+		<intent>
+			<action android:name="android.intent.action.SET_WALLPAPER"/>
 		</intent>
 	</queries>
 
@@ -83,6 +95,7 @@
 		<activity android:name=".activities.ApplicationList"/>
 		<activity android:name=".activities.Folder"/>
 		<activity android:name=".activities.Preferences"/>
+		<activity android:name=".activities.WallpaperPicker"/>
 		<activity android:name=".activities.Unlock"/>
 		<activity android:name=".activities.ProtectionSettings"/>
 		<activity

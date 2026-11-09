@@ -17,15 +17,22 @@
 
 package org.cosinus.launchertv;
 
+import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.ImageView;
+
+import org.cosinus.launchertv.activities.Preferences;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,6 +43,9 @@ import java.lang.ref.WeakReference;
 
 public class HomeImage {
 	private static final int MAX_SIZE = 32 * 1024 * 1024;
+	// Image décodée partagée entre l'accueil, la liste des applications et les dossiers.
+	private static Bitmap sShared;
+	private static long sSharedModified;
 	private final ImageView mView;
 	private final File mFile;
 	private LoadTask mTask;
@@ -51,18 +61,40 @@ public class HomeImage {
 		return (new File(context.getFilesDir(), "home_image"));
 	}
 
-	public void show(boolean visible, boolean fit) {
-		mView.setScaleType(fit ? ImageView.ScaleType.FIT_CENTER : ImageView.ScaleType.CENTER_CROP);
+	public void show(boolean visible, ImageView.ScaleType scaleType) {
+		mView.setScaleType(scaleType);
 		if (!visible || !mFile.isFile()) {
 			clear();
 			return;
 		}
-		if (mModified == mFile.lastModified() && (mImage != null || mTask != null))
+		long modified = mFile.lastModified();
+		if (mModified == modified && (mImage != null || mTask != null))
 			return;
 		clear();
-		mModified = mFile.lastModified();
-		mTask = new LoadTask(this, mFile);
+		mModified = modified;
+		Bitmap shared = getShared(modified);
+		if (shared != null) {
+			display(shared);
+			return;
+		}
+		mTask = new LoadTask(this, mFile, modified);
 		mTask.execute();
+	}
+
+	private void display(Bitmap image) {
+		mImage = image;
+		mView.setImageBitmap(image);
+		mView.setVisibility(View.VISIBLE);
+	}
+
+	private static synchronized Bitmap getShared(long modified) {
+		return (sSharedModified == modified ? sShared : null);
+	}
+
+	private static synchronized void setShared(Bitmap image, long modified) {
+		// L'ancienne image peut encore être affichée ailleurs : le ramasse-miettes la libère.
+		sShared = image;
+		sSharedModified = modified;
 	}
 
 	public void clear() {
@@ -77,13 +109,21 @@ public class HomeImage {
 	}
 
 	public static File copy(Context context, Uri uri) throws IOException {
+		InputStream input = context.getContentResolver().openInputStream(uri);
+		if (input == null)
+			throw new IOException("Image unavailable");
+		return (copy(context, input));
+	}
+
+	/**
+	 * Copie et valide une image dans un fichier temporaire. Le flux est toujours fermé.
+	 */
+	public static File copy(Context context, InputStream source) throws IOException {
 		File file = File.createTempFile("home_image_", ".tmp", context.getCacheDir());
 		boolean valid = false;
 		try {
-			try (InputStream input = context.getContentResolver().openInputStream(uri);
+			try (InputStream input = source;
 					FileOutputStream output = new FileOutputStream(file)) {
-				if (input == null)
-					throw new IOException("Image unavailable");
 				byte[] buffer = new byte[8192];
 				int count;
 				int size = 0;
@@ -106,6 +146,70 @@ public class HomeImage {
 			if (!valid)
 				file.delete();
 		}
+	}
+
+	/**
+	 * Installe une image validée par {@link #copy} comme fond d'accueil et l'affiche.
+	 */
+	public static boolean install(Context context, File file) {
+		return (install(context, file, true));
+	}
+
+	private static boolean install(Context context, File file, boolean show) {
+		File target = getFile(context);
+		if (file == null || !file.renameTo(target)) {
+			if (file != null)
+				file.delete();
+			return (false);
+		}
+		target.setLastModified(System.currentTimeMillis());
+		SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit()
+				.putBoolean(Preferences.PREFERENCE_HOME_IMAGE, true);
+		if (show)
+			editor.putBoolean(Preferences.PREFERENCE_SHOW_WALLPAPER, true);
+		editor.apply();
+		return (true);
+	}
+
+	/**
+	 * Sans fond Android utilisable (Android TV notamment), l'accueil serait noir :
+	 * le fond intégré sert alors de fond par défaut.
+	 */
+	public static boolean needsBuiltInDefault(Context context) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			try {
+				if (!WallpaperManager.getInstance(context).isWallpaperSupported())
+					return (true);
+			} catch (RuntimeException e) {
+				return (true);
+			}
+		}
+		// Un téléviseur sans sélecteur ne permet pas de changer son fond Android.
+		return (Wallpapers.isTelevision(context)
+				&& new Intent(Intent.ACTION_SET_WALLPAPER).resolveActivity(context.getPackageManager()) == null);
+	}
+
+	/**
+	 * Installe le fond intégré sans modifier l'option « Afficher le fond d'écran ».
+	 */
+	public static boolean installDefault(Context context) {
+		try {
+			InputStream input = Wallpapers.openDefault(context);
+			return (input != null && install(context, copy(context, input), false));
+		} catch (IOException | RuntimeException | OutOfMemoryError e) {
+			e.printStackTrace();
+			return (false);
+		}
+	}
+
+	/**
+	 * Retire l'image d'accueil privée. L'image Android reste inchangée.
+	 */
+	public static boolean remove(Context context) {
+		PreferenceManager.getDefaultSharedPreferences(context).edit()
+				.putBoolean(Preferences.PREFERENCE_HOME_IMAGE, false).apply();
+		File file = getFile(context);
+		return (!file.exists() || file.delete());
 	}
 
 	private static Bitmap read(File file) throws IOException {
@@ -156,16 +260,25 @@ public class HomeImage {
 	private static class LoadTask extends AsyncTask<Void, Void, Bitmap> {
 		private final WeakReference<HomeImage> mOwner;
 		private final File mFile;
+		private final long mModified;
 
-		LoadTask(HomeImage owner, File file) {
+		LoadTask(HomeImage owner, File file, long modified) {
 			mOwner = new WeakReference<>(owner);
 			mFile = file;
+			mModified = modified;
 		}
 
 		@Override
 		protected Bitmap doInBackground(Void... values) {
+			Bitmap shared = getShared(mModified);
+			if (shared != null)
+				return (shared);
 			try {
-				return (read(mFile));
+				// Libérer l'ancienne image partagée avant d'en décoder une nouvelle.
+				setShared(null, 0);
+				Bitmap image = read(mFile);
+				setShared(image, mModified);
+				return (image);
 			} catch (IOException | OutOfMemoryError e) {
 				e.printStackTrace();
 				return (null);
@@ -175,22 +288,11 @@ public class HomeImage {
 		@Override
 		protected void onPostExecute(Bitmap image) {
 			HomeImage owner = mOwner.get();
-			if (owner == null || owner.mTask != this) {
-				onCancelled(image);
+			if (owner == null || owner.mTask != this)
 				return;
-			}
 			owner.mTask = null;
-			owner.mImage = image;
-			if (image != null) {
-				owner.mView.setImageBitmap(image);
-				owner.mView.setVisibility(View.VISIBLE);
-			}
-		}
-
-		@Override
-		protected void onCancelled(Bitmap image) {
 			if (image != null)
-				image.recycle();
+				owner.display(image);
 		}
 	}
 }

@@ -26,8 +26,8 @@
 	<string name="title_grid_y">Rows</string>
 	<string name="summary_grid_y">Number of rows: %s</string>
 	<string name="system">System</string>
-	<string name="title_background">Background</string>
-	<string name="summary_background">Set background image</string>
+	<string name="title_background">Wallpaper</string>
+	<string name="summary_background">Choose the built-in wallpaper or an image from this device or a USB drive</string>
 	<string name="title_system">System settings</string>
 	<string name="title_screensaver">Screen saver</string>
 	<string name="summary_screensaver">Open screen saver settings</string>
@@ -93,8 +93,8 @@
 	<string name="title_show_wallpaper">Show wallpaper on home</string>
 	<string name="summary_show_wallpaper">Turn off for a black home background without changing the Android wallpaper.</string>
 	<string name="reset_wallpaper">Restore default wallpaper</string>
-	<string name="summary_reset_wallpaper">Restore the Android home wallpaper for all launchers.</string>
-	<string name="confirm_reset_wallpaper">Restore the default Android home wallpaper? This changes the wallpaper for all launchers.</string>
+	<string name="summary_reset_wallpaper">Restore the default wallpaper. Without an Android wallpaper (most TVs), the built-in wallpaper is used; otherwise the Android home wallpaper is restored for all launchers.</string>
+	<string name="confirm_reset_wallpaper">Restore the default wallpaper? Without an Android wallpaper (most TVs), the built-in wallpaper is used; otherwise the Android home wallpaper is restored, which changes it for all launchers.</string>
 	<string name="resetting_wallpaper">Restoring wallpaper…</string>
 	<string name="wallpaper_restored">Default wallpaper restored.</string>
 	<string name="wallpaper_error">Unable to restore the wallpaper on this device.</string>
@@ -105,16 +105,11 @@
 	<string name="network_disconnected">No network connection</string>
 	<string name="ip_unavailable">No IP address available</string>
 	<string name="network_unavailable">Network information unavailable</string>
-	<string name="choose_home_image">Choose home image</string>
-	<string name="summary_choose_home_image">Choose an image for LauncherTV only (up to 32 MB). Enables the home image.</string>
-	<string name="use_home_image">Use home image</string>
-	<string name="summary_home_image">Turn off to show the Android wallpaper again. The Android wallpaper is unchanged.</string>
-	<string name="image_scale">Home image scaling</string>
+	<string name="image_scale">Wallpaper scaling</string>
 	<string name="image_fit">Whole image (with black borders if needed)</string>
 	<string name="image_crop">Fill screen (crop edges if needed)</string>
-	<string name="image_imported">Home image saved</string>
+	<string name="image_imported">Wallpaper applied</string>
 	<string name="image_error">Cannot save this image. Choose a valid image up to 32 MB.</string>
-	<string name="image_picker_unavailable">No image picker is available</string>
 	<string-array name="image_scale_labels">
 		<item>@string/image_fit</item>
 		<item>@string/image_crop</item>
@@ -128,4 +123,18 @@
 	<string name="summary_home">Choose LauncherTV as the default home screen in Android settings.</string>
 	<string name="home_settings_unavailable">Home selection is unavailable. Opened Android settings.</string>
 	<string name="title_privacy">Privacy policy</string>
+	<string name="wallpaper_picker_title">Choose wallpaper</string>
+	<string name="wallpaper_hint">Built-in wallpaper. Allow photo access to also show images from this device and USB drives.</string>
+	<string name="wallpaper_builtin">Built-in</string>
+	<string name="wallpaper_local_permission">Show local and USB images</string>
+	<string name="wallpaper_permission_denied">Photo access denied. Allow it in Android settings to show local and USB images.</string>
+	<string name="wallpaper_browse">Other apps…</string>
+	<string name="wallpaper_system">Android wallpaper</string>
+	<string name="wallpaper_loading">Searching for images on this device and USB drives…</string>
+	<string name="wallpaper_none">No images found on this device or USB drives.</string>
+	<string name="wallpaper_applying">Applying wallpaper…</string>
+	<plurals name="wallpaper_count">
+		<item quantity="one">%1$d image found on this device and USB drives</item>
+		<item quantity="other">%1$d images found on this device and USB drives</item>
+	</plurals>
 </resources>

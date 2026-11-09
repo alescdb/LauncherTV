@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import org.cosinus.launchertv.AppInfo;
 import org.cosinus.launchertv.Folders;
+import org.cosinus.launchertv.HomeBackground;
 import org.cosinus.launchertv.R;
 import org.cosinus.launchertv.Protection;
 import org.cosinus.launchertv.Setup;
@@ -53,6 +54,7 @@ public class Folder extends Activity implements View.OnClickListener, AdapterVie
 	private Folders mFolders;
 	private GridView mList;
 	private AlertDialog mDialog;
+	private HomeBackground mBackground;
 
 	@Override
 	protected void onCreate(Bundle state) {
@@ -63,6 +65,7 @@ public class Folder extends Activity implements View.OnClickListener, AdapterVie
 		if (state != null)
 			mSelection = state.getInt(STATE_SELECTION, 0);
 		setContentView(R.layout.folder);
+		mBackground = HomeBackground.attach(this);
 		mList = (GridView) findViewById(R.id.list);
 		mList.setOnItemClickListener(this);
 		mList.setOnItemLongClickListener(this);
@@ -80,6 +83,7 @@ public class Folder extends Activity implements View.OnClickListener, AdapterVie
 	@Override
 	protected void onResume() {
 		super.onResume();
+		mBackground.update();
 		refresh();
 	}
 
@@ -100,6 +104,7 @@ public class Folder extends Activity implements View.OnClickListener, AdapterVie
 	protected void onDestroy() {
 		if (mDialog != null)
 			mDialog.dismiss();
+		mBackground.clear();
 		super.onDestroy();
 	}
 
