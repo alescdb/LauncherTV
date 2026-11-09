@@ -43,6 +43,9 @@ import java.lang.ref.WeakReference;
 
 public class HomeImage {
 	private static final int MAX_SIZE = 32 * 1024 * 1024;
+	// Image décodée partagée entre l'accueil, la liste des applications et les dossiers.
+	private static Bitmap sShared;
+	private static long sSharedModified;
 	private final ImageView mView;
 	private final File mFile;
 	private LoadTask mTask;
@@ -58,18 +61,40 @@ public class HomeImage {
 		return (new File(context.getFilesDir(), "home_image"));
 	}
 
-	public void show(boolean visible, boolean fit) {
-		mView.setScaleType(fit ? ImageView.ScaleType.FIT_CENTER : ImageView.ScaleType.CENTER_CROP);
+	public void show(boolean visible, ImageView.ScaleType scaleType) {
+		mView.setScaleType(scaleType);
 		if (!visible || !mFile.isFile()) {
 			clear();
 			return;
 		}
-		if (mModified == mFile.lastModified() && (mImage != null || mTask != null))
+		long modified = mFile.lastModified();
+		if (mModified == modified && (mImage != null || mTask != null))
 			return;
 		clear();
-		mModified = mFile.lastModified();
-		mTask = new LoadTask(this, mFile);
+		mModified = modified;
+		Bitmap shared = getShared(modified);
+		if (shared != null) {
+			display(shared);
+			return;
+		}
+		mTask = new LoadTask(this, mFile, modified);
 		mTask.execute();
+	}
+
+	private void display(Bitmap image) {
+		mImage = image;
+		mView.setImageBitmap(image);
+		mView.setVisibility(View.VISIBLE);
+	}
+
+	private static synchronized Bitmap getShared(long modified) {
+		return (sSharedModified == modified ? sShared : null);
+	}
+
+	private static synchronized void setShared(Bitmap image, long modified) {
+		// L'ancienne image peut encore être affichée ailleurs : le ramasse-miettes la libère.
+		sShared = image;
+		sSharedModified = modified;
 	}
 
 	public void clear() {
@@ -235,16 +260,25 @@ public class HomeImage {
 	private static class LoadTask extends AsyncTask<Void, Void, Bitmap> {
 		private final WeakReference<HomeImage> mOwner;
 		private final File mFile;
+		private final long mModified;
 
-		LoadTask(HomeImage owner, File file) {
+		LoadTask(HomeImage owner, File file, long modified) {
 			mOwner = new WeakReference<>(owner);
 			mFile = file;
+			mModified = modified;
 		}
 
 		@Override
 		protected Bitmap doInBackground(Void... values) {
+			Bitmap shared = getShared(mModified);
+			if (shared != null)
+				return (shared);
 			try {
-				return (read(mFile));
+				// Libérer l'ancienne image partagée avant d'en décoder une nouvelle.
+				setShared(null, 0);
+				Bitmap image = read(mFile);
+				setShared(image, mModified);
+				return (image);
 			} catch (IOException | OutOfMemoryError e) {
 				e.printStackTrace();
 				return (null);
@@ -254,22 +288,11 @@ public class HomeImage {
 		@Override
 		protected void onPostExecute(Bitmap image) {
 			HomeImage owner = mOwner.get();
-			if (owner == null || owner.mTask != this) {
-				onCancelled(image);
+			if (owner == null || owner.mTask != this)
 				return;
-			}
 			owner.mTask = null;
-			owner.mImage = image;
-			if (image != null) {
-				owner.mView.setImageBitmap(image);
-				owner.mView.setVisibility(View.VISIBLE);
-			}
-		}
-
-		@Override
-		protected void onCancelled(Bitmap image) {
 			if (image != null)
-				image.recycle();
+				owner.display(image);
 		}
 	}
 }

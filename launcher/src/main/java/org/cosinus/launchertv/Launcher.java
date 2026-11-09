@@ -33,7 +33,7 @@ import org.cosinus.launchertv.fragments.ApplicationFragment;
 
 public class Launcher extends FragmentActivity {
 	private static final String PREFERENCE_DEFAULT_CHECKED = "default_wallpaper_checked";
-	private HomeImage mHomeImage;
+	private HomeBackground mBackground;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +43,8 @@ public class Launcher extends FragmentActivity {
 
 		setFullScreen();
 		setContentView(R.layout.activity_launcher);
-		mHomeImage = new HomeImage((ImageView) findViewById(R.id.home_image));
-		setWallpaper();
+		mBackground = new HomeBackground(this, (ImageView) findViewById(R.id.home_image));
+		mBackground.update();
 		installDefaultWallpaper();
 
 		if (savedInstanceState == null) {
@@ -58,12 +58,12 @@ public class Launcher extends FragmentActivity {
 	protected void onResume() {
 		super.onResume();
 		setFullScreen();
-		setWallpaper();
+		mBackground.update();
 	}
 
 	@Override
 	protected void onDestroy() {
-		mHomeImage.clear();
+		mBackground.clear();
 		super.onDestroy();
 	}
 
@@ -88,7 +88,7 @@ public class Launcher extends FragmentActivity {
 					@Override
 					public void run() {
 						if (!isFinishing())
-							setWallpaper();
+							mBackground.update();
 					}
 				});
 			}
@@ -102,15 +102,6 @@ public class Launcher extends FragmentActivity {
 		} catch (PackageManager.NameNotFoundException e) {
 			return (false);
 		}
-	}
-
-	private void setWallpaper() {
-		Setup setup = new Setup(this);
-		boolean visible = setup.showWallpaper();
-		mHomeImage.show(visible && setup.useHomeImage(), setup.fitHomeImage());
-		getWindow().setFlags(visible ? WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER : 0,
-				WindowManager.LayoutParams.FLAG_SHOW_WALLPAPER);
-		getWindow().setBackgroundDrawableResource(visible ? android.R.color.transparent : android.R.color.black);
 	}
 
 	private void setFullScreen() {

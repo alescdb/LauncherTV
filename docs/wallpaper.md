@@ -20,7 +20,8 @@ own. Open **Wallpaper** in preferences and use the remote to browse:
 The focused image is previewed behind the list. Press OK to apply it.
 LauncherTV keeps a private copy (up to 32 MB) without changing Android's
 wallpaper. Photo orientation is respected, and an invalid image keeps the
-previous wallpaper.
+previous wallpaper. The wallpaper is also shown, slightly dimmed, behind the
+application list and folders.
 
 In **Wallpaper scaling**, choose:
 
