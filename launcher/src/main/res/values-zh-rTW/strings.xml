@@ -26,8 +26,8 @@
 	<string name="title_grid_y">列數</string>
 	<string name="summary_grid_y">列數：%s</string>
 	<string name="system">系統</string>
-	<string name="title_background">背景</string>
-	<string name="summary_background">設定背景圖片</string>
+	<string name="title_background">桌布</string>
+	<string name="summary_background">選擇內建桌布，或此裝置與 USB 隨身碟中的圖片</string>
 	<string name="title_system">系統設定</string>
 	<string name="title_screensaver">螢幕保護程式</string>
 	<string name="summary_screensaver">開啟螢幕保護程式設定</string>
@@ -92,8 +92,8 @@
 	<string name="title_show_wallpaper">在主畫面顯示桌布</string>
 	<string name="summary_show_wallpaper">關閉後主畫面背景將變為黑色，不會變更 Android 桌布。</string>
 	<string name="reset_wallpaper">還原預設桌布</string>
-	<string name="summary_reset_wallpaper">還原所有啟動器共用的 Android 主畫面桌布。</string>
-	<string name="confirm_reset_wallpaper">要還原預設 Android 主畫面桌布嗎？這會變更所有啟動器的桌布。</string>
+	<string name="summary_reset_wallpaper">還原預設桌布。沒有 Android 桌布的裝置（多數電視）會使用內建桌布；否則會還原所有啟動器共用的 Android 主畫面桌布。</string>
+	<string name="confirm_reset_wallpaper">要還原預設桌布嗎？沒有 Android 桌布的裝置（多數電視）會使用內建桌布；否則會還原 Android 主畫面桌布，這會變更所有啟動器的桌布。</string>
 	<string name="resetting_wallpaper">正在還原桌布…</string>
 	<string name="wallpaper_restored">已還原預設桌布。</string>
 	<string name="wallpaper_error">無法在此裝置上還原桌布。</string>
@@ -104,16 +104,11 @@
 	<string name="network_disconnected">未連線至網路</string>
 	<string name="ip_unavailable">沒有可用的 IP 位址</string>
 	<string name="network_unavailable">無法取得網路資訊</string>
-	<string name="choose_home_image">選擇主畫面圖片</string>
-	<string name="summary_choose_home_image">選擇僅供 LauncherTV 使用的圖片（最大 32 MB），並啟用主畫面圖片。</string>
-	<string name="use_home_image">使用主畫面圖片</string>
-	<string name="summary_home_image">停用後會重新顯示 Android 桌布。Android 桌布不會變更。</string>
-	<string name="image_scale">主畫面圖片縮放方式</string>
+	<string name="image_scale">桌布縮放方式</string>
 	<string name="image_fit">完整圖片（必要時加上黑邊）</string>
 	<string name="image_crop">填滿螢幕（必要時裁切邊緣）</string>
-	<string name="image_imported">已儲存主畫面圖片</string>
+	<string name="image_imported">已套用桌布</string>
 	<string name="image_error">無法儲存此圖片。請選擇有效且不超過 32 MB 的圖片。</string>
-	<string name="image_picker_unavailable">沒有可用的圖片選擇工具</string>
 	<string name="title_show_network">顯示網路圖示</string>
 	<string name="summary_show_network">在時鐘旁顯示連線類型，不會檢查網際網路存取狀態。</string>
 	<string name="network_wifi">已連線至 Wi-Fi</string>
@@ -123,4 +118,17 @@
 	<string name="summary_home">在 Android 設定中將 LauncherTV 設為預設主畫面。</string>
 	<string name="home_settings_unavailable">無法選擇主畫面，已開啟 Android 設定。</string>
 	<string name="title_privacy">隱私權政策</string>
+	<string name="wallpaper_picker_title">選擇桌布</string>
+	<string name="wallpaper_hint">內建桌布。允許存取相片後，也會顯示此裝置與 USB 隨身碟中的圖片。</string>
+	<string name="wallpaper_builtin">內建</string>
+	<string name="wallpaper_local_permission">顯示本機與 USB 圖片</string>
+	<string name="wallpaper_permission_denied">已拒絕存取相片。請在 Android 設定中允許，才能顯示本機與 USB 圖片。</string>
+	<string name="wallpaper_browse">其他應用程式…</string>
+	<string name="wallpaper_system">Android 桌布</string>
+	<string name="wallpaper_loading">正在搜尋此裝置與 USB 隨身碟中的圖片…</string>
+	<string name="wallpaper_none">在此裝置與 USB 隨身碟中找不到圖片。</string>
+	<string name="wallpaper_applying">正在套用桌布…</string>
+	<plurals name="wallpaper_count">
+		<item quantity="other">在此裝置與 USB 隨身碟中找到 %1$d 張圖片</item>
+	</plurals>
 </resources>

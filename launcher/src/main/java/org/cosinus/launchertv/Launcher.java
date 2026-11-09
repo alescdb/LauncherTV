@@ -17,8 +17,13 @@
 
 package org.cosinus.launchertv;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -27,6 +32,7 @@ import android.widget.ImageView;
 import org.cosinus.launchertv.fragments.ApplicationFragment;
 
 public class Launcher extends FragmentActivity {
+	private static final String PREFERENCE_DEFAULT_CHECKED = "default_wallpaper_checked";
 	private HomeImage mHomeImage;
 
 	@Override
@@ -39,6 +45,7 @@ public class Launcher extends FragmentActivity {
 		setContentView(R.layout.activity_launcher);
 		mHomeImage = new HomeImage((ImageView) findViewById(R.id.home_image));
 		setWallpaper();
+		installDefaultWallpaper();
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
@@ -58,6 +65,43 @@ public class Launcher extends FragmentActivity {
 	protected void onDestroy() {
 		mHomeImage.clear();
 		super.onDestroy();
+	}
+
+	/**
+	 * Applique le fond intégré une seule fois, après une nouvelle installation.
+	 * Une mise à jour conserve le fond affiché jusque-là.
+	 */
+	private void installDefaultWallpaper() {
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+		if (preferences.getBoolean(PREFERENCE_DEFAULT_CHECKED, false))
+			return;
+		preferences.edit().putBoolean(PREFERENCE_DEFAULT_CHECKED, true).apply();
+		if (!isNewInstall() || HomeImage.getFile(this).isFile() || !HomeImage.needsBuiltInDefault(this))
+			return;
+		final Context context = getApplicationContext();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				if (!HomeImage.installDefault(context))
+					return;
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						if (!isFinishing())
+							setWallpaper();
+					}
+				});
+			}
+		}, "default-wallpaper").start();
+	}
+
+	private boolean isNewInstall() {
+		try {
+			PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+			return (info.firstInstallTime == info.lastUpdateTime);
+		} catch (PackageManager.NameNotFoundException e) {
+			return (false);
+		}
 	}
 
 	private void setWallpaper() {

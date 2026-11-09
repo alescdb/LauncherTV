@@ -30,8 +30,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
-import android.preference.CheckBoxPreference;
-import android.preference.PreferenceManager;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.provider.Settings;
@@ -44,8 +42,6 @@ import org.cosinus.launchertv.Protection;
 import org.cosinus.launchertv.Setup;
 
 import java.util.Locale;
-import java.io.File;
-import java.lang.ref.WeakReference;
 
 @SuppressWarnings("deprecation")
 public class Preferences extends PreferenceActivity {
@@ -70,8 +66,6 @@ public class Preferences extends PreferenceActivity {
 	private static final String PREFERENCE_ABOUT = "preference_about";
 	private static final String PREFERENCE_SCREENSAVER = "preference_screensaver";
 	private static final int REQUEST_UNLOCK = 100;
-	private static final int REQUEST_IMAGE = 101;
-	private ImageImport mImageImport;
 	private boolean mAuthorized;
 	private AlertDialog mWallpaperDialog;
 	private AsyncTask<Void, Void, Boolean> mWallpaperReset;
@@ -101,18 +95,6 @@ public class Preferences extends PreferenceActivity {
 				return (true);
 			}
 		});
-		findPreference(PREFERENCE_HOME_IMAGE).setEnabled(HomeImage.getFile(this).isFile());
-		findPreference("preference_choose_image").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				try {
-					startActivityForResult(new Intent(Intent.ACTION_GET_CONTENT).setType("image/*").addCategory(Intent.CATEGORY_OPENABLE), REQUEST_IMAGE);
-				} catch (ActivityNotFoundException | SecurityException e) {
-					Toast.makeText(Preferences.this, R.string.image_picker_unavailable, Toast.LENGTH_LONG).show();
-				}
-				return (true);
-			}
-		});
 		findPreference("preference_reset_wallpaper").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
@@ -123,13 +105,7 @@ public class Preferences extends PreferenceActivity {
 		findPreference("preference_background").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				try {
-					startActivity(new Intent(Intent.ACTION_SET_WALLPAPER));
-				} catch (ActivityNotFoundException e) {
-					Toast.makeText(Preferences.this, R.string.wallpaper_unavailable, Toast.LENGTH_LONG).show();
-				} catch (SecurityException e) {
-					Toast.makeText(Preferences.this, R.string.wallpaper_unavailable, Toast.LENGTH_LONG).show();
-				}
+				startActivity(new Intent(Preferences.this, WallpaperPicker.class));
 				return (true);
 			}
 		});
@@ -238,14 +214,6 @@ public class Preferences extends PreferenceActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
-		if (requestCode == REQUEST_IMAGE) {
-			if (mAuthorized && resultCode == RESULT_OK && intent != null && intent.getData() != null && mImageImport == null) {
-				findPreference("preference_choose_image").setEnabled(false);
-				mImageImport = new ImageImport(this, intent.getData());
-				mImageImport.execute();
-			}
-			return;
-		}
 		if (requestCode == REQUEST_UNLOCK) {
 			if (resultCode == RESULT_OK) {
 				mAuthorized = true;
@@ -281,12 +249,16 @@ public class Preferences extends PreferenceActivity {
 		mWallpaperReset = new AsyncTask<Void, Void, Boolean>() {
 			@Override
 			protected Boolean doInBackground(Void... args) {
+				boolean removed = HomeImage.remove(context);
 				try {
 					Background.reset(context);
-					return (true);
 				} catch (Exception e) {
-					return (false);
+					// Android TV n'a souvent pas de fond système : seule l'image du launcher est retirée.
+					e.printStackTrace();
 				}
+				if (HomeImage.needsBuiltInDefault(context))
+					return (HomeImage.installDefault(context));
+				return (removed);
 			}
 
 			@Override
@@ -349,63 +321,8 @@ public class Preferences extends PreferenceActivity {
 		);
 	}
 
-	private void imageImported(File file) {
-		mImageImport = null;
-		findPreference("preference_choose_image").setEnabled(true);
-		boolean success = file != null && file.renameTo(HomeImage.getFile(this));
-		if (success) {
-			PreferenceManager.getDefaultSharedPreferences(this).edit().putBoolean(PREFERENCE_HOME_IMAGE, true).apply();
-			CheckBoxPreference preference = (CheckBoxPreference) findPreference(PREFERENCE_HOME_IMAGE);
-			preference.setEnabled(true);
-			preference.setChecked(true);
-		} else if (file != null) {
-			file.delete();
-		}
-		Toast.makeText(this, success ? R.string.image_imported : R.string.image_error, Toast.LENGTH_LONG).show();
-	}
-
-	private static class ImageImport extends AsyncTask<Void, Void, File> {
-		private final WeakReference<Preferences> mOwner;
-		private final Context mContext;
-		private final Uri mUri;
-
-		ImageImport(Preferences owner, Uri uri) {
-			mOwner = new WeakReference<>(owner);
-			mContext = owner.getApplicationContext();
-			mUri = uri;
-		}
-
-		@Override
-		protected File doInBackground(Void... values) {
-			try {
-				return (HomeImage.copy(mContext, mUri));
-			} catch (Exception | OutOfMemoryError e) {
-				e.printStackTrace();
-				return (null);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(File file) {
-			Preferences owner = mOwner.get();
-			if (owner == null || owner.isFinishing()) {
-				onCancelled(file);
-				return;
-			}
-			owner.imageImported(file);
-		}
-
-		@Override
-		protected void onCancelled(File file) {
-			if (file != null)
-				file.delete();
-		}
-	}
-
 	@Override
 	public void onDestroy() {
-		if (mImageImport != null)
-			mImageImport.cancel(true);
 		if (mWallpaperReset != null)
 			mWallpaperReset.cancel(true);
 		if (mWallpaperDialog != null)
